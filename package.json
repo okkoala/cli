@@ -8,13 +8,6 @@
     "test": "node index.js help",
     "ci": "npm run test && npm publish --access public"
   },
-  "files": [
-    "api.js",
-    "cli.js",
-    "driver.js",
-    "index.js",
-    "LICENSE"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/okkoala/cli.git"
