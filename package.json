@@ -1,6 +1,6 @@
 {
   "name": "@okkoala/koala",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Official CLI for okkoala.com",
   "main": "index.js",
   "bin": "index.js",
