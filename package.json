@@ -9,10 +9,10 @@
     "ci": "npm run test && npm publish --access public"
   },
   "files": [
-    "./api.js",
-    "./cli.js",
-    "./driver.js",
-    "./index.js",
+    "api.js",
+    "cli.js",
+    "driver.js",
+    "index.js",
     "LICENSE"
   ],
   "repository": {
