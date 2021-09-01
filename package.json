@@ -1,0 +1,29 @@
+{
+  "name": "okkoala-cli",
+  "version": "0.0.0",
+  "description": "Official CLI for okkoala.com",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "test": "node index.js help"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okkoala/cli.git"
+  },
+  "keywords": [
+    "cli",
+    "okkoala",
+    "phishing",
+    "api"
+  ],
+  "author": "Nigriv Sp. z o.o.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/okkoala/cli/issues"
+  },
+  "homepage": "https://github.com/okkoala/cli#readme",
+  "dependencies": {
+    "isomorphic-fetch": "^3.0.0"
+  }
+}
