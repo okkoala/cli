@@ -1,5 +1,5 @@
 {
-  "name": "okkoala-cli",
+  "name": "@okkoala/cli",
   "version": "0.0.0",
   "description": "Official CLI for okkoala.com",
   "main": "index.js",
