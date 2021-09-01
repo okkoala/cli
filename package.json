@@ -16,7 +16,8 @@
     "cli",
     "okkoala",
     "phishing",
-    "api"
+    "api",
+    "koala"
   ],
   "author": "Nigriv Sp. z o.o.",
   "license": "MIT",
