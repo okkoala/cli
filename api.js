@@ -11,7 +11,7 @@ module.exports = class API {
         });
     }
 
-    ActivateMFAInput = ["token"]
+    ActivateMFAInput = ["token"];
     ActivateMFA({ token }) {
         return this._driver.sendPost({
             data: { token },
@@ -19,7 +19,7 @@ module.exports = class API {
         });
     }
 
-    AddCodeInput = ["id", "value", "validTo"]
+    AddCodeInput = ["id", "value", "validTo"];
     AddCode({ id, value, validTo }) {
         return this._driver.sendPost({
             data: { id, value, validTo },
@@ -27,7 +27,7 @@ module.exports = class API {
         });
     }
 
-    AddDataRecordInput = ["last_name", "first_name", "email", "type"]
+    AddDataRecordInput = ["last_name", "first_name", "email", "type"];
     AddDataRecord({ last_name, first_name, email, type }) {
         return this._driver.sendPost({
             data: { last_name, first_name, email, type },
@@ -35,7 +35,7 @@ module.exports = class API {
         });
     }
 
-    AppSettingsChangingAuditSettingsInput = ["ACCEPTING", "FIRST_PHASE", "SECOND_PHASE", "THIRD_PHASE", "SLEEP_TIME", "TESTING", "WAITING_FOR_RESULTS", "REPORT", "FINAL_TEMPLATE_ID"]
+    AppSettingsChangingAuditSettingsInput = ["ACCEPTING", "FIRST_PHASE", "SECOND_PHASE", "THIRD_PHASE", "SLEEP_TIME", "TESTING", "WAITING_FOR_RESULTS", "REPORT", "FINAL_TEMPLATE_ID"];
     AppSettingsChangingAuditSettings({ ACCEPTING, FIRST_PHASE, SECOND_PHASE, THIRD_PHASE, SLEEP_TIME, TESTING, WAITING_FOR_RESULTS, REPORT, FINAL_TEMPLATE_ID }) {
         return this._driver.sendPost({
             data: { ACCEPTING, FIRST_PHASE, SECOND_PHASE, THIRD_PHASE, SLEEP_TIME, TESTING, WAITING_FOR_RESULTS, REPORT, FINAL_TEMPLATE_ID },
@@ -43,7 +43,7 @@ module.exports = class API {
         });
     }
 
-    ArchiveAuditInput = ["id_audit", "archived"]
+    ArchiveAuditInput = ["id_audit", "archived"];
     ArchiveAudit({ id_audit, archived }) {
         return this._driver.sendPost({
             data: { id_audit, archived },
@@ -51,7 +51,7 @@ module.exports = class API {
         });
     }
 
-    AssetsServiceUploadInput = ["name", "type"]
+    AssetsServiceUploadInput = ["name", "type"];
     AssetsServiceUpload({ name, type }) {
         return this._driver.sendPost({
             data: { name, type },
@@ -59,7 +59,7 @@ module.exports = class API {
         });
     }
 
-    AssignCourseToIdentityInput = ["id_identity", "id_course"]
+    AssignCourseToIdentityInput = ["id_identity", "id_course"];
     AssignCourseToIdentity({ id_identity, id_course }) {
         return this._driver.sendPost({
             data: { id_identity, id_course },
@@ -67,7 +67,7 @@ module.exports = class API {
         });
     }
 
-    AssignEmployeeToTagInput = ["id_data", "tag", "email", "id"]
+    AssignEmployeeToTagInput = ["id_data", "tag", "email", "id"];
     AssignEmployeeToTag({ id_data, tag, email, id }) {
         return this._driver.sendPost({
             data: { id_data, tag, email, id },
@@ -75,7 +75,7 @@ module.exports = class API {
         });
     }
 
-    AttachReasonToTemplateInput = ["id_template", "id_reason"]
+    AttachReasonToTemplateInput = ["id_template", "id_reason"];
     AttachReasonToTemplate({ id_template, id_reason }) {
         return this._driver.sendPost({
             data: { id_template, id_reason },
@@ -95,7 +95,7 @@ module.exports = class API {
         });
     }
 
-    AuthOutlookAddinInput = ["bootstrapToken"]
+    AuthOutlookAddinInput = ["bootstrapToken"];
     AuthOutlookAddin({ bootstrapToken }) {
         return this._driver.sendPost({
             data: { bootstrapToken },
@@ -133,7 +133,7 @@ module.exports = class API {
         });
     }
 
-    BillingGetDownloadUrlAsModeratorInput = ["id_billing", "id"]
+    BillingGetDownloadUrlAsModeratorInput = ["id_billing", "id"];
     BillingGetDownloadUrlAsModerator({ id_billing, id }) {
         return this._driver.sendPost({
             data: { id_billing, id },
@@ -141,7 +141,7 @@ module.exports = class API {
         });
     }
 
-    BillingGetDownloadUrlAsUserInput = ["id"]
+    BillingGetDownloadUrlAsUserInput = ["id"];
     BillingGetDownloadUrlAsUser({ id }) {
         return this._driver.sendPost({
             data: { id },
@@ -149,7 +149,7 @@ module.exports = class API {
         });
     }
 
-    BillingGetUploadUrlInput = ["key", "id_billing", "extension", "contentType"]
+    BillingGetUploadUrlInput = ["key", "id_billing", "extension", "contentType"];
     BillingGetUploadUrl({ key, id_billing, extension, contentType }) {
         return this._driver.sendPost({
             data: { key, id_billing, extension, contentType },
@@ -157,7 +157,7 @@ module.exports = class API {
         });
     }
 
-    CanChangeDealStateInput = ["state", "target_state"]
+    CanChangeDealStateInput = ["state", "target_state"];
     CanChangeDealState({ state, target_state }) {
         return this._driver.sendPost({
             data: { state, target_state },
@@ -165,7 +165,7 @@ module.exports = class API {
         });
     }
 
-    ChangeAccountTypeInput = ["id_user", "user_role", "id_identity"]
+    ChangeAccountTypeInput = ["id_user", "user_role", "id_identity"];
     ChangeAccountType({ id_user, user_role, id_identity }) {
         return this._driver.sendPut({
             data: { id_user, user_role, id_identity },
@@ -173,7 +173,7 @@ module.exports = class API {
         });
     }
 
-    ChangeBillingPayStatusInput = ["payed", "id_billing", "id"]
+    ChangeBillingPayStatusInput = ["payed", "id_billing", "id"];
     ChangeBillingPayStatus({ payed, id_billing, id }) {
         return this._driver.sendPut({
             data: { payed, id_billing, id },
@@ -181,7 +181,7 @@ module.exports = class API {
         });
     }
 
-    CheckCodeInput = ["id"]
+    CheckCodeInput = ["id"];
     CheckCode({ id }) {
         return this._driver.sendGet({
             endpoint: ["codes", encodeURIComponent(id)].join("/"),
@@ -200,7 +200,7 @@ module.exports = class API {
         });
     }
 
-    CompleteTaskInput = ["id_mission", "id_template", "answer"]
+    CompleteTaskInput = ["id_mission", "id_template", "answer"];
     CompleteTask({ id_mission, id_template, answer }) {
         return this._driver.sendPost({
             data: { id_mission, id_template, answer },
@@ -208,7 +208,7 @@ module.exports = class API {
         });
     }
 
-    ConsumeOrderInput = ["id", "consumed"]
+    ConsumeOrderInput = ["id", "consumed"];
     ConsumeOrder({ id, consumed }) {
         return this._driver.sendPut({
             data: { id, consumed },
@@ -216,7 +216,7 @@ module.exports = class API {
         });
     }
 
-    ConsumeQuestionInput = ["id", "consumed"]
+    ConsumeQuestionInput = ["id", "consumed"];
     ConsumeQuestion({ id, consumed }) {
         return this._driver.sendPut({
             data: { id, consumed },
@@ -224,7 +224,7 @@ module.exports = class API {
         });
     }
 
-    ContactInput = ["email", "ms_teams", "question", "rodo", "token"]
+    ContactInput = ["email", "ms_teams", "question", "rodo", "token"];
     Contact({ email, ms_teams, question, rodo, token }) {
         return this._driver.sendPost({
             data: { email, ms_teams, question, rodo, token },
@@ -238,28 +238,28 @@ module.exports = class API {
         });
     }
 
-    CountTempleteQueuesInput = ["payed", "id_billing"]
+    CountTempleteQueuesInput = ["payed", "id_billing"];
     CountTempleteQueues({ payed, id_billing }) {
         return this._driver.sendGet({
             endpoint: "/template-queue/count",
         });
     }
 
-    CourseByIdInput = ["id"]
+    CourseByIdInput = ["id"];
     CourseById({ id }) {
         return this._driver.sendGet({
             endpoint: ["courses", encodeURIComponent(id)].join("/"),
         });
     }
 
-    CoursesAvailableForCompanyInput = ["id"]
+    CoursesAvailableForCompanyInput = ["id"];
     CoursesAvailableForCompany({ id }) {
         return this._driver.sendGet({
             endpoint: ["courses", "available", encodeURIComponent(id)].join("/"),
         });
     }
 
-    CreateAgreementInput = ["id", "value", "agreement_date", "acceptance_date"]
+    CreateAgreementInput = ["id", "value", "agreement_date", "acceptance_date"];
     CreateAgreement({ id, value, agreement_date, acceptance_date }) {
         return this._driver.sendPost({
             data: { id, value, agreement_date, acceptance_date },
@@ -273,7 +273,7 @@ module.exports = class API {
         });
     }
 
-    CreateCertInput = ["id_data", "first_name", "last_name", "email"]
+    CreateCertInput = ["id_data", "first_name", "last_name", "email"];
     CreateCert({ id_data, first_name, last_name, email }) {
         return this._driver.sendPost({
             data: { id_data, first_name, last_name, email },
@@ -281,7 +281,7 @@ module.exports = class API {
         });
     }
 
-    CreateCompanyAsModeratorInput = ["name", "type"]
+    CreateCompanyAsModeratorInput = ["name", "type"];
     CreateCompanyAsModerator({ name, type }) {
         return this._driver.sendPost({
             data: { name, type },
@@ -289,7 +289,7 @@ module.exports = class API {
         });
     }
 
-    CreateCountryInput = ["isocode"]
+    CreateCountryInput = ["isocode"];
     CreateCountry({ isocode }) {
         return this._driver.sendPost({
             data: { isocode },
@@ -297,7 +297,7 @@ module.exports = class API {
         });
     }
 
-    CreateCourseInput = ["isocode"]
+    CreateCourseInput = ["isocode"];
     CreateCourse({ isocode }) {
         return this._driver.sendPost({
             data: { isocode },
@@ -317,7 +317,7 @@ module.exports = class API {
         });
     }
 
-    CreateFaqInput = ["query", "answer", "lang"]
+    CreateFaqInput = ["query", "answer", "lang"];
     CreateFaq({ query, answer, lang }) {
         return this._driver.sendPost({
             data: { query, answer, lang },
@@ -325,7 +325,7 @@ module.exports = class API {
         });
     }
 
-    CreateFlowInput = ["name", "name_pl", "description", "description_pl"]
+    CreateFlowInput = ["name", "name_pl", "description", "description_pl"];
     CreateFlow({ name, name_pl, description, description_pl }) {
         return this._driver.sendPost({
             data: { name, name_pl, description, description_pl },
@@ -339,7 +339,7 @@ module.exports = class API {
         });
     }
 
-    CreateLeadInput = ["email", "checked"]
+    CreateLeadInput = ["email", "checked"];
     CreateLead({ email, checked }) {
         return this._driver.sendPost({
             data: { email, checked },
@@ -347,14 +347,14 @@ module.exports = class API {
         });
     }
 
-    CreateMFAInput = ["query", "answer"]
+    CreateMFAInput = ["query", "answer"];
     CreateMFA({ query, answer }) {
         return this._driver.sendGet({
             endpoint: "/users/mfa",
         });
     }
 
-    CreateMissionAsModeratorInput = ["id_category", "id_template", "id_template_pl", "title", "title_pl", "value", "type", "answer"]
+    CreateMissionAsModeratorInput = ["id_category", "id_template", "id_template_pl", "title", "title_pl", "value", "type", "answer"];
     CreateMissionAsModerator({ id_category, id_template, id_template_pl, title, title_pl, value, type, answer }) {
         return this._driver.sendPost({
             data: { id_category, id_template, id_template_pl, title, title_pl, value, type, answer },
@@ -362,7 +362,7 @@ module.exports = class API {
         });
     }
 
-    CreateMissionCategoryAsModeratorInput = ["name", "name_pl"]
+    CreateMissionCategoryAsModeratorInput = ["name", "name_pl"];
     CreateMissionCategoryAsModerator({ name, name_pl }) {
         return this._driver.sendPost({
             data: { name, name_pl },
@@ -370,7 +370,7 @@ module.exports = class API {
         });
     }
 
-    CreateOrderInput = ["name", "address", "nip", "regon", "who", "email", "phone_number", "token"]
+    CreateOrderInput = ["name", "address", "nip", "regon", "who", "email", "phone_number", "token"];
     CreateOrder({ name, address, nip, regon, who, email, phone_number, token }) {
         return this._driver.sendPost({
             data: { name, address, nip, regon, who, email, phone_number, token },
@@ -378,7 +378,7 @@ module.exports = class API {
         });
     }
 
-    CreatePartnershipInput = ["email", "id_partner", "user_role"]
+    CreatePartnershipInput = ["email", "id_partner", "user_role"];
     CreatePartnership({ email, id_partner, user_role }) {
         return this._driver.sendPost({
             data: { email, id_partner, user_role },
@@ -398,7 +398,7 @@ module.exports = class API {
         });
     }
 
-    CreatePostPageInput = ["name_pl", "name_en"]
+    CreatePostPageInput = ["name_pl", "name_en"];
     CreatePostPage({ name_pl, name_en }) {
         return this._driver.sendPost({
             data: { name_pl, name_en },
@@ -412,7 +412,7 @@ module.exports = class API {
         });
     }
 
-    CreatePublicTemplateInput = ["id_category", "name", "sender_name", "based_on", "training_only", "lang", "story", "featured", "mjmlCode", "htmlCode", "id_identity", "is_public", "id_mail_transport", "trusted"]
+    CreatePublicTemplateInput = ["id_category", "name", "sender_name", "based_on", "training_only", "lang", "story", "featured", "mjmlCode", "htmlCode", "id_identity", "is_public", "id_mail_transport", "trusted"];
     CreatePublicTemplate({ id_category, name, sender_name, based_on, training_only, lang, story, featured, mjmlCode, htmlCode, id_identity, is_public, id_mail_transport, trusted }) {
         return this._driver.sendPost({
             data: { id_category, name, sender_name, based_on, training_only, lang, story, featured, mjmlCode, htmlCode, id_identity, is_public, id_mail_transport, trusted },
@@ -426,7 +426,7 @@ module.exports = class API {
         });
     }
 
-    CreateQueueInput = ["query", "answer"]
+    CreateQueueInput = ["query", "answer"];
     CreateQueue({ query, answer }) {
         return this._driver.sendPost({
             data: { query, answer },
@@ -434,7 +434,7 @@ module.exports = class API {
         });
     }
 
-    CreateQueueOnPerformInput = ["id", "id_template"]
+    CreateQueueOnPerformInput = ["id", "id_template"];
     CreateQueueOnPerform({ id, id_template }) {
         return this._driver.sendPost({
             data: { id, id_template },
@@ -442,7 +442,7 @@ module.exports = class API {
         });
     }
 
-    CreateReactionInput = ["name", "value"]
+    CreateReactionInput = ["name", "value"];
     CreateReaction({ name, value }) {
         return this._driver.sendPost({
             data: { name, value },
@@ -450,7 +450,7 @@ module.exports = class API {
         });
     }
 
-    CreateReasonInput = ["message", "message_pl"]
+    CreateReasonInput = ["message", "message_pl"];
     CreateReason({ message, message_pl }) {
         return this._driver.sendPost({
             data: { message, message_pl },
@@ -458,7 +458,7 @@ module.exports = class API {
         });
     }
 
-    CreateReportInput = ["name", "count", "avg_final_question", "avg_quiz_score", "minimum_started_at", "id"]
+    CreateReportInput = ["name", "count", "avg_final_question", "avg_quiz_score", "minimum_started_at", "id"];
     CreateReport({ name, count, avg_final_question, avg_quiz_score, minimum_started_at, id }) {
         return this._driver.sendPost({
             data: { name, count, avg_final_question, avg_quiz_score, minimum_started_at, id },
@@ -466,7 +466,7 @@ module.exports = class API {
         });
     }
 
-    CreateTagInput = ["name"]
+    CreateTagInput = ["name"];
     CreateTag({ name }) {
         return this._driver.sendPost({
             data: { name },
@@ -480,7 +480,7 @@ module.exports = class API {
         });
     }
 
-    CreateTemplateCategoryInput = ["name"]
+    CreateTemplateCategoryInput = ["name"];
     CreateTemplateCategory({ name }) {
         return this._driver.sendPost({
             data: { name },
@@ -488,7 +488,7 @@ module.exports = class API {
         });
     }
 
-    CreateTrainingInput = ["id_audit", "id_data"]
+    CreateTrainingInput = ["id_audit", "id_data"];
     CreateTraining({ id_audit, id_data }) {
         return this._driver.sendPost({
             data: { id_audit, id_data },
@@ -502,7 +502,7 @@ module.exports = class API {
         });
     }
 
-    CreateUserInput = ["email", "source", "lang", "id_company", "first_name", "last_name"]
+    CreateUserInput = ["email", "source", "lang", "id_company", "first_name", "last_name"];
     CreateUser({ email, source, lang, id_company, first_name, last_name }) {
         return this._driver.sendPost({
             data: { email, source, lang, id_company, first_name, last_name },
@@ -510,7 +510,7 @@ module.exports = class API {
         });
     }
 
-    CreateUserBillingInput = ["billingName", "dateValue", "id_aggrement", "id", "email", "payed", "id_identity"]
+    CreateUserBillingInput = ["billingName", "dateValue", "id_aggrement", "id", "email", "payed", "id_identity"];
     CreateUserBilling({ billingName, dateValue, id_aggrement, id, email, payed, id_identity }) {
         return this._driver.sendPost({
             data: { billingName, dateValue, id_aggrement, id, email, payed, id_identity },
@@ -518,7 +518,7 @@ module.exports = class API {
         });
     }
 
-    DeleteAzureActiveDirectoryProfileInput = ["id_sync_profiles"]
+    DeleteAzureActiveDirectoryProfileInput = ["id_sync_profiles"];
     DeleteAzureActiveDirectoryProfile({ id_sync_profiles }) {
         return this._driver.sendDelete({
             data: { id_sync_profiles },
@@ -526,7 +526,7 @@ module.exports = class API {
         });
     }
 
-    DeleteComplainInput = ["isocode", "id"]
+    DeleteComplainInput = ["isocode", "id"];
     DeleteComplain({ isocode, id }) {
         return this._driver.sendDelete({
             data: { isocode, id },
@@ -534,7 +534,7 @@ module.exports = class API {
         });
     }
 
-    DeleteCountryInput = ["isocode"]
+    DeleteCountryInput = ["isocode"];
     DeleteCountry({ isocode }) {
         return this._driver.sendDelete({
             data: { isocode },
@@ -542,7 +542,7 @@ module.exports = class API {
         });
     }
 
-    DeleteDetailRecordInput = ["email", "key"]
+    DeleteDetailRecordInput = ["email", "key"];
     DeleteDetailRecord({ email, key }) {
         return this._driver.sendDelete({
             data: { email, key },
@@ -550,7 +550,7 @@ module.exports = class API {
         });
     }
 
-    DeleteFaqInput = ["query", "answer"]
+    DeleteFaqInput = ["query", "answer"];
     DeleteFaq({ query, answer }) {
         return this._driver.sendPost({
             data: { query, answer },
@@ -570,7 +570,7 @@ module.exports = class API {
         });
     }
 
-    DeleteMissionCategoryAsModeratorInput = ["id"]
+    DeleteMissionCategoryAsModeratorInput = ["id"];
     DeleteMissionCategoryAsModerator({ id }) {
         return this._driver.sendDelete({
             data: { id },
@@ -578,7 +578,7 @@ module.exports = class API {
         });
     }
 
-    DeletePartnershipInput = ["id_partnership", "id_partner"]
+    DeletePartnershipInput = ["id_partnership", "id_partner"];
     DeletePartnership({ id_partnership, id_partner }) {
         return this._driver.sendDelete({
             data: { id_partnership, id_partner },
@@ -592,7 +592,7 @@ module.exports = class API {
         });
     }
 
-    DeleteReasonInput = ["id"]
+    DeleteReasonInput = ["id"];
     DeleteReason({ id }) {
         return this._driver.sendDelete({
             data: { id },
@@ -600,7 +600,7 @@ module.exports = class API {
         });
     }
 
-    DeleteTagInput = ["id"]
+    DeleteTagInput = ["id"];
     DeleteTag({ id }) {
         return this._driver.sendDelete({
             data: { id },
@@ -608,7 +608,7 @@ module.exports = class API {
         });
     }
 
-    DeleteTemplateInput = ["id"]
+    DeleteTemplateInput = ["id"];
     DeleteTemplate({ id }) {
         return this._driver.sendDelete({
             data: { id },
@@ -616,7 +616,7 @@ module.exports = class API {
         });
     }
 
-    DeleteTemplateCategoryInput = ["isocode"]
+    DeleteTemplateCategoryInput = ["isocode"];
     DeleteTemplateCategory({ isocode }) {
         return this._driver.sendDelete({
             data: { isocode },
@@ -624,7 +624,7 @@ module.exports = class API {
         });
     }
 
-    DeleteTrainingInput = ["id_audit", "id_data"]
+    DeleteTrainingInput = ["id_audit", "id_data"];
     DeleteTraining({ id_audit, id_data }) {
         return this._driver.sendDelete({
             data: { id_audit, id_data },
@@ -632,7 +632,7 @@ module.exports = class API {
         });
     }
 
-    DetachCourseFromIdentityInput = ["id_identity", "id_course"]
+    DetachCourseFromIdentityInput = ["id_identity", "id_course"];
     DetachCourseFromIdentity({ id_identity, id_course }) {
         return this._driver.sendDelete({
             data: { id_identity, id_course },
@@ -640,7 +640,7 @@ module.exports = class API {
         });
     }
 
-    DetachFromTemplateInput = ["id_template", "id_reason"]
+    DetachFromTemplateInput = ["id_template", "id_reason"];
     DetachFromTemplate({ id_template, id_reason }) {
         return this._driver.sendDelete({
             data: { id_template, id_reason },
@@ -648,28 +648,28 @@ module.exports = class API {
         });
     }
 
-    DownloadDealLetterInput = ["id"]
+    DownloadDealLetterInput = ["id"];
     DownloadDealLetter({ id }) {
         return this._driver.sendGet({
             endpoint: ["deals", encodeURIComponent(id), "pdf"].join("/"),
         });
     }
 
-    DownloadHtmlContentInput = ["id"]
+    DownloadHtmlContentInput = ["id"];
     DownloadHtmlContent({ id }) {
         return this._driver.sendGet({
             endpoint: ["templates", encodeURIComponent(id), "html"].join("/"),
         });
     }
 
-    DownloadMjmlContentInput = ["id"]
+    DownloadMjmlContentInput = ["id"];
     DownloadMjmlContent({ id }) {
         return this._driver.sendGet({
             endpoint: ["templates", encodeURIComponent(id), "mjml"].join("/"),
         });
     }
 
-    DropEmailFromSandboxInput = ["id"]
+    DropEmailFromSandboxInput = ["id"];
     DropEmailFromSandbox({ id }) {
         return this._driver.sendDelete({
             data: { id },
@@ -683,7 +683,7 @@ module.exports = class API {
         });
     }
 
-    EmployeesAssignedToTagInput = ["id"]
+    EmployeesAssignedToTagInput = ["id"];
     EmployeesAssignedToTag({ id }) {
         return this._driver.sendGet({
             endpoint: ["tags", encodeURIComponent(id)].join("/"),
@@ -696,7 +696,7 @@ module.exports = class API {
         });
     }
 
-    EndTrainingInput = ["id_data", "first_name", "last_name", "email"]
+    EndTrainingInput = ["id_data", "first_name", "last_name", "email"];
     EndTraining({ id_data, first_name, last_name, email }) {
         return this._driver.sendPost({
             data: { id_data, first_name, last_name, email },
@@ -710,7 +710,7 @@ module.exports = class API {
         });
     }
 
-    ExternalUserInput = ["id_identity"]
+    ExternalUserInput = ["id_identity"];
     ExternalUser({ id_identity }) {
         return this._driver.sendPost({
             data: { id_identity },
@@ -718,28 +718,28 @@ module.exports = class API {
         });
     }
 
-    GetAuditAgreementAsModeratorInput = ["user", "id"]
+    GetAuditAgreementAsModeratorInput = ["user", "id"];
     GetAuditAgreementAsModerator({ user, id }) {
         return this._driver.sendGet({
             endpoint: ["audits", encodeURIComponent(user), encodeURIComponent(id), "agreement"].join("/"),
         });
     }
 
-    GetAuditAgreementsInput = ["id"]
+    GetAuditAgreementsInput = ["id"];
     GetAuditAgreements({ id }) {
         return this._driver.sendGet({
             endpoint: ["audits", encodeURIComponent(id), "agreement"].join("/"),
         });
     }
 
-    GetAuditRecipeInput = ["id"]
+    GetAuditRecipeInput = ["id"];
     GetAuditRecipe({ id }) {
         return this._driver.sendGet({
             endpoint: ["audits", encodeURIComponent(id), "recipe"].join("/"),
         });
     }
 
-    GetBillingsByIdInput = ["id"]
+    GetBillingsByIdInput = ["id"];
     GetBillingsById({ id }) {
         return this._driver.sendGet({
             endpoint: ["billings", "users", encodeURIComponent(id)].join("/"),
@@ -752,14 +752,14 @@ module.exports = class API {
         });
     }
 
-    GetCertInput = ["id_data", "first_name", "last_name", "email"]
+    GetCertInput = ["id_data", "first_name", "last_name", "email"];
     GetCert({ id_data, first_name, last_name, email }) {
         return this._driver.sendGet({
             endpoint: "/certs",
         });
     }
 
-    GetChangesOfDealInput = ["id_data", "first_name", "last_name", "email", "id"]
+    GetChangesOfDealInput = ["id_data", "first_name", "last_name", "email", "id"];
     GetChangesOfDeal({ id_data, first_name, last_name, email, id }) {
         return this._driver.sendGet({
             endpoint: ["partner", "deal-changes", encodeURIComponent(id)].join("/"),
@@ -784,7 +784,7 @@ module.exports = class API {
         });
     }
 
-    GetDealByIdInput = ["id"]
+    GetDealByIdInput = ["id"];
     GetDealById({ id }) {
         return this._driver.sendGet({
             endpoint: ["deals", encodeURIComponent(id), "data"].join("/"),
@@ -815,14 +815,14 @@ module.exports = class API {
         });
     }
 
-    GetInfoAboutTemplateInput = ["id"]
+    GetInfoAboutTemplateInput = ["id"];
     GetInfoAboutTemplate({ id }) {
         return this._driver.sendGet({
             endpoint: ["templates", encodeURIComponent(id), "info"].join("/"),
         });
     }
 
-    GetInfoAsAnEmployeeInput = ["id"]
+    GetInfoAsAnEmployeeInput = ["id"];
     GetInfoAsAnEmployee({ id }) {
         return this._driver.sendPost({
             data: { id },
@@ -842,7 +842,7 @@ module.exports = class API {
         });
     }
 
-    GetMyCertInput = ["id_data", "first_name", "last_name", "email"]
+    GetMyCertInput = ["id_data", "first_name", "last_name", "email"];
     GetMyCert({ id_data, first_name, last_name, email }) {
         return this._driver.sendGet({
             endpoint: "/me/certs",
@@ -861,7 +861,7 @@ module.exports = class API {
         });
     }
 
-    GetPostInput = ["id"]
+    GetPostInput = ["id"];
     GetPost({ id }) {
         return this._driver.sendGet({
             endpoint: ["posts", encodeURIComponent(id)].join("/"),
@@ -874,14 +874,14 @@ module.exports = class API {
         });
     }
 
-    GetPublicTemplateByIdInput = ["id"]
+    GetPublicTemplateByIdInput = ["id"];
     GetPublicTemplateById({ id }) {
         return this._driver.sendGet({
             endpoint: ["templates", "public", encodeURIComponent(id)].join("/"),
         });
     }
 
-    GetPublicUploadUrlInput = ["id"]
+    GetPublicUploadUrlInput = ["id"];
     GetPublicUploadUrl({ id }) {
         return this._driver.sendPost({
             data: { id },
@@ -889,7 +889,7 @@ module.exports = class API {
         });
     }
 
-    GetReportInput = ["id_audit"]
+    GetReportInput = ["id_audit"];
     GetReport({ id_audit }) {
         return this._driver.sendPost({
             data: { id_audit },
@@ -915,7 +915,7 @@ module.exports = class API {
         });
     }
 
-    GetTransportByIdInput = ["id"]
+    GetTransportByIdInput = ["id"];
     GetTransportById({ id }) {
         return this._driver.sendGet({
             endpoint: ["transports", encodeURIComponent(id), "info"].join("/"),
@@ -934,21 +934,21 @@ module.exports = class API {
         });
     }
 
-    GetUserByIdInput = ["id"]
+    GetUserByIdInput = ["id"];
     GetUserById({ id }) {
         return this._driver.sendGet({
             endpoint: ["data", "id", encodeURIComponent(id)].join("/"),
         });
     }
 
-    GetUserInfoInput = ["id"]
+    GetUserInfoInput = ["id"];
     GetUserInfo({ id }) {
         return this._driver.sendGet({
             endpoint: ["users", "info", encodeURIComponent(id)].join("/"),
         });
     }
 
-    GetUsersEmployeesDataInput = ["id"]
+    GetUsersEmployeesDataInput = ["id"];
     GetUsersEmployeesData({ id }) {
         return this._driver.sendGet({
             endpoint: ["users", "data", encodeURIComponent(id)].join("/"),
@@ -979,14 +979,14 @@ module.exports = class API {
         });
     }
 
-    InfoAboutMyCourseInput = ["id_data", "first_name", "last_name", "email", "id"]
+    InfoAboutMyCourseInput = ["id_data", "first_name", "last_name", "email", "id"];
     InfoAboutMyCourse({ id_data, first_name, last_name, email, id }) {
         return this._driver.sendGet({
             endpoint: ["me", "courses", encodeURIComponent(id)].join("/"),
         });
     }
 
-    InsertDetailRecordInput = ["email", "key", "value"]
+    InsertDetailRecordInput = ["email", "key", "value"];
     InsertDetailRecord({ email, key, value }) {
         return this._driver.sendPost({
             data: { email, key, value },
@@ -1006,28 +1006,28 @@ module.exports = class API {
         });
     }
 
-    ListAuditEmployeesInput = ["id"]
+    ListAuditEmployeesInput = ["id"];
     ListAuditEmployees({ id }) {
         return this._driver.sendGet({
             endpoint: ["audits", encodeURIComponent(id), "employees"].join("/"),
         });
     }
 
-    ListAuditEmployeesAsModeratorInput = ["user", "id"]
+    ListAuditEmployeesAsModeratorInput = ["user", "id"];
     ListAuditEmployeesAsModerator({ user, id }) {
         return this._driver.sendGet({
             endpoint: ["audits", encodeURIComponent(user), encodeURIComponent(id), "employees"].join("/"),
         });
     }
 
-    ListAuditQueuesInput = ["id"]
+    ListAuditQueuesInput = ["id"];
     ListAuditQueues({ id }) {
         return this._driver.sendGet({
             endpoint: ["audits", encodeURIComponent(id), "queues"].join("/"),
         });
     }
 
-    ListAuditQueuesAsModeratorInput = ["user", "id"]
+    ListAuditQueuesAsModeratorInput = ["user", "id"];
     ListAuditQueuesAsModerator({ user, id }) {
         return this._driver.sendGet({
             endpoint: ["audits", encodeURIComponent(user), encodeURIComponent(id), "queues"].join("/"),
@@ -1040,7 +1040,7 @@ module.exports = class API {
         });
     }
 
-    ListAuditsAsModeratorInput = ["owner"]
+    ListAuditsAsModeratorInput = ["owner"];
     ListAuditsAsModerator({ owner }) {
         return this._driver.sendGet({
             endpoint: ["audits", "users", encodeURIComponent(owner)].join("/"),
@@ -1089,7 +1089,7 @@ module.exports = class API {
         });
     }
 
-    ListCustomUserAgreementsInput = ["id"]
+    ListCustomUserAgreementsInput = ["id"];
     ListCustomUserAgreements({ id }) {
         return this._driver.sendGet({
             endpoint: ["agreements", encodeURIComponent(id)].join("/"),
@@ -1102,7 +1102,7 @@ module.exports = class API {
         });
     }
 
-    ListEmailsFromSandboxInput = ["to"]
+    ListEmailsFromSandboxInput = ["to"];
     ListEmailsFromSandbox({ to }) {
         return this._driver.sendPost({
             data: { to },
@@ -1170,7 +1170,7 @@ module.exports = class API {
         });
     }
 
-    ListOneAuditAsModeratorInput = ["owner"]
+    ListOneAuditAsModeratorInput = ["owner"];
     ListOneAuditAsModerator({ owner }) {
         return this._driver.sendGet({
             endpoint: ["audits", encodeURIComponent(owner)].join("/"),
@@ -1183,7 +1183,7 @@ module.exports = class API {
         });
     }
 
-    ListPartnershipsInput = ["id"]
+    ListPartnershipsInput = ["id"];
     ListPartnerships({ id }) {
         return this._driver.sendGet({
             endpoint: ["partner", encodeURIComponent(id), "partnership"].join("/"),
@@ -1208,7 +1208,7 @@ module.exports = class API {
         });
     }
 
-    ListPostsCommentsInput = ["id_post"]
+    ListPostsCommentsInput = ["id_post"];
     ListPostsComments({ id_post }) {
         return this._driver.sendGet({
             endpoint: ["posts", encodeURIComponent(id_post), "comments"].join("/"),
@@ -1221,7 +1221,7 @@ module.exports = class API {
         });
     }
 
-    ListPublicTemplateCategoryByCategoryInput = ["id"]
+    ListPublicTemplateCategoryByCategoryInput = ["id"];
     ListPublicTemplateCategoryByCategory({ id }) {
         return this._driver.sendGet({
             endpoint: ["template-category", encodeURIComponent(id), "public"].join("/"),
@@ -1246,7 +1246,7 @@ module.exports = class API {
         });
     }
 
-    ListReactionsOfEmployeeInput = ["id"]
+    ListReactionsOfEmployeeInput = ["id"];
     ListReactionsOfEmployee({ id }) {
         return this._driver.sendGet({
             endpoint: ["data", encodeURIComponent(id), "reactions"].join("/"),
@@ -1259,7 +1259,7 @@ module.exports = class API {
         });
     }
 
-    ListReasonsAttachingInput = ["id"]
+    ListReasonsAttachingInput = ["id"];
     ListReasonsAttaching({ id }) {
         return this._driver.sendGet({
             endpoint: ["reasons", encodeURIComponent(id)].join("/"),
@@ -1278,28 +1278,28 @@ module.exports = class API {
         });
     }
 
-    ListTemplateMJMLInput = ["id"]
+    ListTemplateMJMLInput = ["id"];
     ListTemplateMJML({ id }) {
         return this._driver.sendGet({
             endpoint: ["templates", encodeURIComponent(id), "mjml"].join("/"),
         });
     }
 
-    ListTemplateQueuesInput = ["payed", "id_billing"]
+    ListTemplateQueuesInput = ["payed", "id_billing"];
     ListTemplateQueues({ payed, id_billing }) {
         return this._driver.sendGet({
             endpoint: "/template-queue",
         });
     }
 
-    ListTemplatesByUserInput = ["id"]
+    ListTemplatesByUserInput = ["id"];
     ListTemplatesByUser({ id }) {
         return this._driver.sendGet({
             endpoint: ["templates", "users", encodeURIComponent(id)].join("/"),
         });
     }
 
-    ListTrainingsByAuditInput = ["id"]
+    ListTrainingsByAuditInput = ["id"];
     ListTrainingsByAudit({ id }) {
         return this._driver.sendGet({
             endpoint: ["trainings", "by-audit", encodeURIComponent(id)].join("/"),
@@ -1366,7 +1366,7 @@ module.exports = class API {
         });
     }
 
-    MyCoursesInput = ["id_data", "first_name", "last_name", "email"]
+    MyCoursesInput = ["id_data", "first_name", "last_name", "email"];
     MyCourses({ id_data, first_name, last_name, email }) {
         return this._driver.sendGet({
             endpoint: "/me/courses",
@@ -1391,21 +1391,21 @@ module.exports = class API {
         });
     }
 
-    PostsInMyCourseInput = ["id_data", "first_name", "last_name", "email", "id"]
+    PostsInMyCourseInput = ["id_data", "first_name", "last_name", "email", "id"];
     PostsInMyCourse({ id_data, first_name, last_name, email, id }) {
         return this._driver.sendGet({
             endpoint: ["me", "courses", encodeURIComponent(id), "posts"].join("/"),
         });
     }
 
-    ReadAuditAsModeratorInput = ["user", "id"]
+    ReadAuditAsModeratorInput = ["user", "id"];
     ReadAuditAsModerator({ user, id }) {
         return this._driver.sendGet({
             endpoint: ["audits", encodeURIComponent(user), encodeURIComponent(id), "info"].join("/"),
         });
     }
 
-    ReadAuditSchemaInput = ["id"]
+    ReadAuditSchemaInput = ["id"];
     ReadAuditSchema({ id }) {
         return this._driver.sendGet({
             endpoint: ["audits", encodeURIComponent(id), "flow"].join("/"),
@@ -1430,7 +1430,7 @@ module.exports = class API {
         });
     }
 
-    ReadMissionForTrainingInput = ["id_mission"]
+    ReadMissionForTrainingInput = ["id_mission"];
     ReadMissionForTraining({ id_mission }) {
         return this._driver.sendPost({
             data: { id_mission },
@@ -1438,7 +1438,7 @@ module.exports = class API {
         });
     }
 
-    ReadMissionStatusForTrainingInput = ["id_mission"]
+    ReadMissionStatusForTrainingInput = ["id_mission"];
     ReadMissionStatusForTraining({ id_mission }) {
         return this._driver.sendPost({
             data: { id_mission },
@@ -1464,7 +1464,7 @@ module.exports = class API {
         });
     }
 
-    ReadMissionsForUserTrainingInput = ["id_category"]
+    ReadMissionsForUserTrainingInput = ["id_category"];
     ReadMissionsForUserTraining({ id_category }) {
         return this._driver.sendPost({
             data: { id_category },
@@ -1490,14 +1490,14 @@ module.exports = class API {
         });
     }
 
-    ReadOneAuditInput = ["id"]
+    ReadOneAuditInput = ["id"];
     ReadOneAudit({ id }) {
         return this._driver.sendGet({
             endpoint: ["audits", encodeURIComponent(id), "info"].join("/"),
         });
     }
 
-    ReadRecordByEmailInput = ["email"]
+    ReadRecordByEmailInput = ["email"];
     ReadRecordByEmail({ email }) {
         return this._driver.sendGet({
             endpoint: ["data", encodeURIComponent(email)].join("/"),
@@ -1510,7 +1510,7 @@ module.exports = class API {
         });
     }
 
-    ReadUserComplainsInput = ["id"]
+    ReadUserComplainsInput = ["id"];
     ReadUserComplains({ id }) {
         return this._driver.sendGet({
             endpoint: ["trainings", "complain", encodeURIComponent(id)].join("/"),
@@ -1535,7 +1535,7 @@ module.exports = class API {
         });
     }
 
-    RemovePostCommentInput = ["id_post", "id_posts_comment"]
+    RemovePostCommentInput = ["id_post", "id_posts_comment"];
     RemovePostComment({ id_post, id_posts_comment }) {
         return this._driver.sendDelete({
             data: { id_post, id_posts_comment },
@@ -1543,7 +1543,7 @@ module.exports = class API {
         });
     }
 
-    RemovePostReactionInput = ["id_post"]
+    RemovePostReactionInput = ["id_post"];
     RemovePostReaction({ id_post }) {
         return this._driver.sendDelete({
             data: { id_post },
@@ -1551,7 +1551,7 @@ module.exports = class API {
         });
     }
 
-    RemoveRecordInput = ["email"]
+    RemoveRecordInput = ["email"];
     RemoveRecord({ email }) {
         return this._driver.sendDelete({
             data: { email },
@@ -1559,14 +1559,14 @@ module.exports = class API {
         });
     }
 
-    ReportSpeakInput = ["id", "priority"]
+    ReportSpeakInput = ["id", "priority"];
     ReportSpeak({ id, priority }) {
         return this._driver.sendGet({
             endpoint: ["reports", encodeURIComponent(id), "say-it"].join("/"),
         });
     }
 
-    ReportTemplateQueueInput = ["id_template_queue", "password"]
+    ReportTemplateQueueInput = ["id_template_queue", "password"];
     ReportTemplateQueue({ id_template_queue, password }) {
         return this._driver.sendPost({
             data: { id_template_queue, password },
@@ -1574,7 +1574,7 @@ module.exports = class API {
         });
     }
 
-    RescheduleTemplateQueueSendingInput = ["start_time", "end_time", "id"]
+    RescheduleTemplateQueueSendingInput = ["start_time", "end_time", "id"];
     RescheduleTemplateQueueSending({ start_time, end_time, id }) {
         return this._driver.sendPut({
             data: { start_time, end_time, id },
@@ -1594,7 +1594,7 @@ module.exports = class API {
         });
     }
 
-    RestoreDataInput = ["id_data"]
+    RestoreDataInput = ["id_data"];
     RestoreData({ id_data }) {
         return this._driver.sendPut({
             data: { id_data },
@@ -1644,7 +1644,7 @@ module.exports = class API {
         });
     }
 
-    SetVisibilityOfFlowInput = ["id_flow", "visible"]
+    SetVisibilityOfFlowInput = ["id_flow", "visible"];
     SetVisibilityOfFlow({ id_flow, visible }) {
         return this._driver.sendPut({
             data: { id_flow, visible },
@@ -1664,7 +1664,7 @@ module.exports = class API {
         });
     }
 
-    SumCustomUserTrainingsValueInput = ["id_identity"]
+    SumCustomUserTrainingsValueInput = ["id_identity"];
     SumCustomUserTrainingsValue({ id_identity }) {
         return this._driver.sendPost({
             data: { id_identity },
@@ -1690,7 +1690,7 @@ module.exports = class API {
         });
     }
 
-    SystemTimeInput = ["id_identity"]
+    SystemTimeInput = ["id_identity"];
     SystemTime({ id_identity }) {
         return this._driver.sendGet({
             endpoint: "/system/time",
@@ -1721,14 +1721,14 @@ module.exports = class API {
         });
     }
 
-    TrainingLeaderboardForEmployeeInput = ["id_audit"]
+    TrainingLeaderboardForEmployeeInput = ["id_audit"];
     TrainingLeaderboardForEmployee({ id_audit }) {
         return this._driver.sendPost({
             endpoint: ["trainings", encodeURIComponent(id_audit), "employee-leaderboard"].join("/"),
         });
     }
 
-    UnsignEmployeeFromTagInput = ["id_data", "id"]
+    UnsignEmployeeFromTagInput = ["id_data", "id"];
     UnsignEmployeeFromTag({ id_data, id }) {
         return this._driver.sendDelete({
             data: { id_data, id },
@@ -1736,7 +1736,7 @@ module.exports = class API {
         });
     }
 
-    UpdateAuditRecipeInput = ["recipe", "id"]
+    UpdateAuditRecipeInput = ["recipe", "id"];
     UpdateAuditRecipe({ recipe, id }) {
         return this._driver.sendPut({
             data: { recipe, id },
@@ -1744,7 +1744,7 @@ module.exports = class API {
         });
     }
 
-    UpdateAuditStateInput = ["state", "id"]
+    UpdateAuditStateInput = ["state", "id"];
     UpdateAuditState({ state, id }) {
         return this._driver.sendPut({
             data: { state, id },
@@ -1752,7 +1752,7 @@ module.exports = class API {
         });
     }
 
-    UpdateAuditStateAsModeratorInput = ["state", "user", "id"]
+    UpdateAuditStateAsModeratorInput = ["state", "user", "id"];
     UpdateAuditStateAsModerator({ state, user, id }) {
         return this._driver.sendPut({
             data: { state, user, id },
@@ -1760,7 +1760,7 @@ module.exports = class API {
         });
     }
 
-    UpdateAuditWelcomeSettingsInput = ["logo", "contact", "website"]
+    UpdateAuditWelcomeSettingsInput = ["logo", "contact", "website"];
     UpdateAuditWelcomeSettings({ logo, contact, website }) {
         return this._driver.sendPost({
             data: { logo, contact, website },
@@ -1780,7 +1780,7 @@ module.exports = class API {
         });
     }
 
-    UpdateDealStateInput = ["state", "target_state", "id"]
+    UpdateDealStateInput = ["state", "target_state", "id"];
     UpdateDealState({ state, target_state, id }) {
         return this._driver.sendPut({
             data: { state, target_state, id },
@@ -1812,7 +1812,7 @@ module.exports = class API {
         });
     }
 
-    UpdateOrderAsModeatorInput = ["id", "order"]
+    UpdateOrderAsModeatorInput = ["id", "order"];
     UpdateOrderAsModeator({ id, order }) {
         return this._driver.sendPost({
             data: { id, order },
@@ -1826,7 +1826,7 @@ module.exports = class API {
         });
     }
 
-    UpdatePublicTemplateInput = ["id", "id_category", "name", "sender_name", "based_on", "training_only", "lang", "story", "featured", "mjmlCode", "htmlCode", "id_identity", "is_public", "id_mail_transport", "trusted"]
+    UpdatePublicTemplateInput = ["id", "id_category", "name", "sender_name", "based_on", "training_only", "lang", "story", "featured", "mjmlCode", "htmlCode", "id_identity", "is_public", "id_mail_transport", "trusted"];
     UpdatePublicTemplate({ id, id_category, name, sender_name, based_on, training_only, lang, story, featured, mjmlCode, htmlCode, id_identity, is_public, id_mail_transport, trusted }) {
         return this._driver.sendPut({
             data: { id, id_category, name, sender_name, based_on, training_only, lang, story, featured, mjmlCode, htmlCode, id_identity, is_public, id_mail_transport, trusted },
@@ -1834,7 +1834,7 @@ module.exports = class API {
         });
     }
 
-    UpdateRecordInput = ["id_data", "first_name", "last_name", "email"]
+    UpdateRecordInput = ["id_data", "first_name", "last_name", "email"];
     UpdateRecord({ id_data, first_name, last_name, email }) {
         return this._driver.sendPut({
             data: { id_data, first_name, last_name, email },
@@ -1842,7 +1842,7 @@ module.exports = class API {
         });
     }
 
-    UpdateStopTrainingsInput = ["stop_trainings", "id"]
+    UpdateStopTrainingsInput = ["stop_trainings", "id"];
     UpdateStopTrainings({ stop_trainings, id }) {
         return this._driver.sendPut({
             data: { stop_trainings, id },
@@ -1862,7 +1862,7 @@ module.exports = class API {
         });
     }
 
-    UpdateTemplateInput = ["name", "sender_name", "senderName", "id_mail_transport", "lang", "id_category", "htmlCode", "deleted", "featured", "story", "training_only", "id"]
+    UpdateTemplateInput = ["name", "sender_name", "senderName", "id_mail_transport", "lang", "id_category", "htmlCode", "deleted", "featured", "story", "training_only", "id"];
     UpdateTemplate({ name, sender_name, senderName, id_mail_transport, lang, id_category, htmlCode, deleted, featured, story, training_only, id }) {
         return this._driver.sendPost({
             data: { name, sender_name, senderName, id_mail_transport, lang, id_category, htmlCode, deleted, featured, story, training_only, id },
@@ -1870,7 +1870,7 @@ module.exports = class API {
         });
     }
 
-    UpdateTemplateCategoryNamesInput = ["id", "name", "pl_name"]
+    UpdateTemplateCategoryNamesInput = ["id", "name", "pl_name"];
     UpdateTemplateCategoryNames({ id, name, pl_name }) {
         return this._driver.sendPut({
             data: { id, name, pl_name },
@@ -1878,7 +1878,7 @@ module.exports = class API {
         });
     }
 
-    UpdateTemplateCategoryPriorityInput = ["id", "priority"]
+    UpdateTemplateCategoryPriorityInput = ["id", "priority"];
     UpdateTemplateCategoryPriority({ id, priority }) {
         return this._driver.sendPut({
             data: { id, priority },
