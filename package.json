@@ -1,9 +1,9 @@
 {
   "name": "@okkoala/koala",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Official CLI for okkoala.com",
-  "main": "index.js",
-  "bin": "index.js",
+  "main": "cli-runner.js",
+  "bin": "cli-runner.js",
   "scripts": {
     "test": "node index.js help",
     "ci": "npm run test && npm publish --access public"
