@@ -35,6 +35,14 @@ module.exports = class API {
         });
     }
 
+    AddTitleToSupportTicketInput = ["id_support_ticket", "title"];
+    AddTitleToSupportTicket({ id_support_ticket, title }) {
+        return this._driver.sendPut({
+            data: { id_support_ticket, title },
+            endpoint: "/support-tickets/title",
+        });
+    }
+
     AppSettingsChangingAuditSettingsInput = ["ACCEPTING", "FIRST_PHASE", "SECOND_PHASE", "THIRD_PHASE", "SLEEP_TIME", "TESTING", "WAITING_FOR_RESULTS", "REPORT", "FINAL_TEMPLATE_ID"];
     AppSettingsChangingAuditSettings({ ACCEPTING, FIRST_PHASE, SECOND_PHASE, THIRD_PHASE, SLEEP_TIME, TESTING, WAITING_FOR_RESULTS, REPORT, FINAL_TEMPLATE_ID }) {
         return this._driver.sendPost({
@@ -185,6 +193,14 @@ module.exports = class API {
     CheckCode({ id }) {
         return this._driver.sendGet({
             endpoint: ["codes", encodeURIComponent(id)].join("/"),
+        });
+    }
+
+    CloseSupportTicketInput = ["id_support_ticket", "title"];
+    CloseSupportTicket({ id_support_ticket, title }) {
+        return this._driver.sendPut({
+            data: { id_support_ticket, title },
+            endpoint: "/support-tickets/close",
         });
     }
 
@@ -1694,6 +1710,14 @@ module.exports = class API {
     SystemTime({ id_identity }) {
         return this._driver.sendGet({
             endpoint: "/system/time",
+        });
+    }
+
+    TakeResponsibilityOfSupportTicketInput = ["id_support_ticket"];
+    TakeResponsibilityOfSupportTicket({ id_support_ticket }) {
+        return this._driver.sendPut({
+            data: { id_support_ticket },
+            endpoint: "/support-tickets/responsibility",
         });
     }
 
