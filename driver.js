@@ -56,7 +56,7 @@ module.exports = class ApiDriver {
     }
 
     get({ endpoint, authorization }) {
-        var headers = {
+        let headers = {
             'Content-Type': 'application/json'
         };
         if (authorization) headers.Authorization = authorization;
@@ -65,14 +65,12 @@ module.exports = class ApiDriver {
             headers: headers,
             credentials: 'include',
             mode: 'cors'
-        }).then(this.checkStatus).then(this.parseJSON);
+        }).then(x => this.checkStatus(x)).then(y => this.parseJSON(y));
     }
 
     post({ endpoint, data = {}, authorization, headers = {} }) {
-        if (!headers) {
-            headers = {
-                'Content-Type': 'application/json'
-            };
+        if (!headers["Content-Type"]) {
+            headers["Content-Type"] = 'application/json';
         }
         if (authorization) headers.Authorization = authorization;
         return fetch(endpoint, {
@@ -84,11 +82,9 @@ module.exports = class ApiDriver {
         }).then(x => this.checkStatus(x)).then(y => this.parseJSON(y));
     }
 
-    put({ endpoint, data = {}, authorization, headers }) {
-        if (!headers) {
-            headers = {
-                'Content-Type': 'application/json'
-            };
+    put({ endpoint, data = {}, authorization, headers = {} }) {
+        if (!headers["Content-Type"]) {
+            headers["Content-Type"] = 'application/json';
         }
         if (authorization) headers.Authorization = authorization;
         return fetch(endpoint, {
@@ -101,7 +97,7 @@ module.exports = class ApiDriver {
     };
 
     delete({ endpoint, data = {}, authorization }) {
-        var headers = {
+        let headers = {
             'Content-Type': 'application/json'
         };
         if (authorization) headers.Authorization = authorization;
@@ -132,23 +128,28 @@ module.exports = class ApiDriver {
     }
 
     checkStatus(response) {
+        if (!response) return;
         if (response.status >= 200 && response.status < 300) {
             return response;
         } else this.onStatus(response.status, response);
     }
 
-    onStatus = (status, response) => {
+    onStatus(status, response) {
         if (status >= 400 & status < 500) {
             console.warn(status, response.statusText);
         } else if (status >= 500 && status < 600) {
-            console.error(response.statusText, response);
             var error = new Error(response.statusText || response.status)
             error.response = response;
             throw error;
         }
     }
 
-    parseJSON = async response => {
-        return await response.json();
+    async parseJSON(response) {
+        try {
+            if (response && response.json)
+                return await response.json();
+        } catch (e) {
+            return response;
+        }
     }
 }
