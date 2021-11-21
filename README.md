@@ -3,6 +3,7 @@
 Quickstart:
 ```bash
 $ npm install -g @okkoala/koala
+$ koala auth
 $ koala help
 ```
 
