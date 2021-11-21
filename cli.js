@@ -1,4 +1,5 @@
 const Api = require("./api.js");
+const options = require("./options");
 
 const getMethods = (obj) => {
     let result = new Set();
@@ -13,6 +14,7 @@ module.exports = class CLI {
 
     constructor() {
         this.client = new Api();
+        this.options = options;
     }
 
     async invoke(args) {
@@ -21,7 +23,7 @@ module.exports = class CLI {
             return this._provideHelp(callArgs);
         }
         if (!this.client[callArgs.methodName]) {
-            return "No such command, check: \"koala help\"";
+            return `No such command, check: "${this.options.name} help"`;
         }
         return await this.client[callArgs.methodName](callArgs.args);
     }
@@ -32,7 +34,7 @@ module.exports = class CLI {
             return getMethods(this.client).join("\n");
         }
         let params = this.client[`${functionProvided}Input`] || [];
-        return `Usage: koala ${functionProvided} ${params.map(el => `--${el} <value>`)}`;
+        return `Usage: ${this.options.name} ${functionProvided} ${params.map(el => `--${el} <value>`)}`;
     }
 
     _processArgs(args) {

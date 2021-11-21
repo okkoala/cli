@@ -1,4 +1,5 @@
 const fetch = require("isomorphic-fetch");
+const options = require("./options");
 
 module.exports = class ApiDriver {
 
@@ -14,48 +15,46 @@ module.exports = class ApiDriver {
         return 'https://' + this.getApiHost();
     }
 
+    opaqueURL(uri) {
+        return new URL([this.getApiFullPath(), uri].join(""));
+    }
+
     getToken() {
-        try {
-            if (localStorage)
-                return localStorage.getItem('token') || '';
-            return JSON.parse(fs.readFileSync("~/.okkoala/credentials").toString()).token;
-        } catch (e) {
-            return "";
-        }
+        return options.getToken();
     }
 
-    sendPost({ endpoint, data }) {
+    sendPost({ endpoint, data } = {}) {
         return this.post({
-            endpoint: this.getApiFullPath() + endpoint,
+            endpoint,
+            data,
             authorization: this.getToken(),
-            data: data,
         });
     }
 
-    sendPut({ endpoint, data }) {
+    sendPut({ endpoint, data } = {}) {
         return this.put({
-            endpoint: this.getApiFullPath() + endpoint,
+            endpoint,
+            data,
             authorization: this.getToken(),
-            data: data,
         });
     }
 
-    sendGet({ endpoint }) {
+    sendGet({ endpoint } = {}) {
         return this.get({
-            endpoint: this.getApiFullPath() + endpoint,
+            endpoint,
             authorization: this.getToken(),
         });
     }
 
-    sendDelete({ endpoint, data }) {
+    sendDelete({ endpoint, data } = {}) {
         return this.delete({
-            endpoint: this.getApiFullPath() + endpoint,
+            endpoint,
+            data,
             authorization: this.getToken(),
-            data: data
         });
     }
 
-    get({ endpoint, authorization }) {
+    get({ endpoint, authorization } = {}) {
         let headers = {
             'Content-Type': 'application/json'
         };
@@ -68,7 +67,7 @@ module.exports = class ApiDriver {
         }).then(x => this.checkStatus(x)).then(y => this.parseJSON(y));
     }
 
-    post({ endpoint, data = {}, authorization, headers = {} }) {
+    post({ endpoint, data = {}, authorization, headers = {} } = {}) {
         if (!headers["Content-Type"]) {
             headers["Content-Type"] = 'application/json';
         }
@@ -82,7 +81,7 @@ module.exports = class ApiDriver {
         }).then(x => this.checkStatus(x)).then(y => this.parseJSON(y));
     }
 
-    put({ endpoint, data = {}, authorization, headers = {} }) {
+    put({ endpoint, data = {}, authorization, headers = {} } = {}) {
         if (!headers["Content-Type"]) {
             headers["Content-Type"] = 'application/json';
         }
@@ -96,7 +95,7 @@ module.exports = class ApiDriver {
         }).then(x => this.checkStatus(x)).then(y => this.parseJSON(y));
     };
 
-    delete({ endpoint, data = {}, authorization }) {
+    delete({ endpoint, data = {}, authorization } = {}) {
         let headers = {
             'Content-Type': 'application/json'
         };
@@ -110,7 +109,7 @@ module.exports = class ApiDriver {
         }).then(x => this.checkStatus(x)).then(y => this.parseJSON(y));
     }
 
-    upload({ endpoint, file, type }) {
+    upload({ endpoint, file, type } = {}) {
         return fetch(endpoint, {
             method: 'PUT',
             body: file,
@@ -120,7 +119,7 @@ module.exports = class ApiDriver {
         }).then(x => this.checkStatus(x))
     }
 
-    download({ endpoint, headers }) {
+    download({ endpoint, headers } = {}) {
         return fetch(endpoint, {
             method: "GET",
             headers,
@@ -135,10 +134,8 @@ module.exports = class ApiDriver {
     }
 
     onStatus(status, response) {
-        if (status >= 400 & status < 500) {
-            console.warn(status, response.statusText);
-        } else if (status >= 500 && status < 600) {
-            var error = new Error(response.statusText || response.status)
+        if (status >= 400 && status < 600) {
+            let error = new Error(response.statusText || response.status)
             error.response = response;
             throw error;
         }
