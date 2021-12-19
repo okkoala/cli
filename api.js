@@ -2268,6 +2268,14 @@ module.exports = class API {
         });
     }
 
+    TrainingCompletnesDetails() {
+        let url = this._driver.opaqueURL("/reports/training-completeness-details");
+
+        return this._driver.sendGet({
+            endpoint: url.toString(),
+        });
+    }
+
     TrainingLeaderboardForClient(input) {
         let url = this._driver.opaqueURL("/trainings/audit-leaderboard");
         return this._driver.sendPost({
