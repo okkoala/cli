@@ -1,6 +1,6 @@
 {
   "name": "@okkoala/koala",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Official CLI for okkoala.com",
   "main": "cli-runner.js",
   "bin": "cli-runner.js",
