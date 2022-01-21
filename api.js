@@ -114,10 +114,11 @@ module.exports = class API {
         });
     }
 
-    AuditTemplatesFiles(input) {
+    AuditTemplatesFilesInput = ["templates", "extension"];
+    AuditTemplatesFiles({ templates, extension }) {
         let url = this._driver.opaqueURL("/templates/audit/files");
         return this._driver.sendPost({
-            data: input,
+            data: { templates, extension },
             endpoint: url.toString(),
         });
     }
@@ -147,10 +148,20 @@ module.exports = class API {
         });
     }
 
-    AzureActiveDirectorySyncProfile(input) {
+    AzureActiveDirectorySyncProfileInput = ["refreshToken", "name"];
+    AzureActiveDirectorySyncProfile({ refreshToken, name }) {
         let url = this._driver.opaqueURL("/azure-active-directory-sync");
         return this._driver.sendPost({
-            data: input,
+            data: { refreshToken, name },
+            endpoint: url.toString(),
+        });
+    }
+
+    AzureCodeLoginInput = ["code"];
+    AzureCodeLogin({ code }) {
+        let url = this._driver.opaqueURL("/auth/outlook-code");
+        return this._driver.sendPost({
+            data: { code },
             endpoint: url.toString(),
         });
     }
@@ -165,6 +176,14 @@ module.exports = class API {
 
     AzureLoginForWebsite() {
         let url = this._driver.opaqueURL("/auth/azure");
+
+        return this._driver.sendGet({
+            endpoint: url.toString(),
+        });
+    }
+
+    AzureOfficeLogin() {
+        let url = this._driver.opaqueURL("/auth/office-sso");
 
         return this._driver.sendGet({
             endpoint: url.toString(),
@@ -321,6 +340,47 @@ module.exports = class API {
         });
     }
 
+    CreateCourseActivityInput = ["id_course_activity", "id_course", "id_user", "state", "progress"];
+    CreateCourseActivity({ id_course_activity, id_course, id_user, state, progress }) {
+        let url = this._driver.opaqueURL("/course-activity");
+        return this._driver.sendPost({
+            data: { id_course_activity, id_course, id_user, state, progress },
+            endpoint: url.toString(),
+        });
+    }
+
+    DeleteCourseActivityInput = ["id_course_activity", "id_course", "id_user", "state", "progress"];
+    DeleteCourseActivity({ id_course_activity, id_course, id_user, state, progress }) {
+        let url = this._driver.opaqueURL("/course-activity");
+        return this._driver.sendDelete({
+            data: { id_course_activity, id_course, id_user, state, progress },
+            endpoint: url.toString(),
+        });
+    }
+
+    ListCourseActivityInput = ["id_course_activity", "id_course", "id_user", "state", "progress"];
+    ListCourseActivity({ id_course_activity, id_course, id_user, state, progress }) {
+        let url = this._driver.opaqueURL(["", "course-activity"].join("/"));
+        if (id_course_activity) url.searchParams.set("id_course_activity", id_course_activity);
+        if (id_course) url.searchParams.set("id_course", id_course);
+        if (id_user) url.searchParams.set("id_user", id_user);
+        if (state) url.searchParams.set("state", state);
+        if (progress) url.searchParams.set("progress", progress);
+
+        return this._driver.sendGet({
+            endpoint: url.toString(),
+        });
+    }
+
+    UpdateCourseActivityInput = ["id_course_activity", "id_course", "id_user", "state", "progress"];
+    UpdateCourseActivity({ id_course_activity, id_course, id_user, state, progress }) {
+        let url = this._driver.opaqueURL("/course-activity");
+        return this._driver.sendPut({
+            data: { id_course_activity, id_course, id_user, state, progress },
+            endpoint: url.toString(),
+        });
+    }
+
     CourseByIdInput = ["id"];
     CourseById({ id }) {
         let url = this._driver.opaqueURL(["", "courses", encodeURIComponent(id)].join("/"));
@@ -428,10 +488,11 @@ module.exports = class API {
         });
     }
 
-    CreateFlowItem(input) {
+    CreateFlowItemInput = ["id_flow_items", "id_flow", "id_mail_transport", "name", "days_offset", "type", "hour_start", "hour_end", "schedule_policy", "redirect_to_training", "template_id", "extensions"];
+    CreateFlowItem({ id_flow_items, id_flow, id_mail_transport, name, days_offset, type, hour_start, hour_end, schedule_policy, redirect_to_training, template_id, extensions }) {
         let url = this._driver.opaqueURL("/flow/items");
         return this._driver.sendPost({
-            data: input,
+            data: { id_flow_items, id_flow, id_mail_transport, name, days_offset, type, hour_start, hour_end, schedule_policy, redirect_to_training, template_id, extensions },
             endpoint: url.toString(),
         });
     }
@@ -532,10 +593,11 @@ module.exports = class API {
         });
     }
 
-    CreateQuestion(input) {
+    CreateQuestionInput = ["name", "way", "question", "token", "consumed", "id", "email", "phone_number", "when_to_call"];
+    CreateQuestion({ name, way, question, token, consumed, id, email, phone_number, when_to_call }) {
         let url = this._driver.opaqueURL("/questions");
         return this._driver.sendPost({
-            data: input,
+            data: { name, way, question, token, consumed, id, email, phone_number, when_to_call },
             endpoint: url.toString(),
         });
     }
@@ -620,11 +682,11 @@ module.exports = class API {
         });
     }
 
-    CreateTrainingInput = ["id_audit", "id_data"];
-    CreateTraining({ id_audit, id_data }) {
+    CreateTrainingInput = ["id_audit", "id_data", "id_user"];
+    CreateTraining({ id_audit, id_data, id_user }) {
         let url = this._driver.opaqueURL("/trainings");
         return this._driver.sendPost({
-            data: { id_audit, id_data },
+            data: { id_audit, id_data, id_user },
             endpoint: url.toString(),
         });
     }
@@ -646,11 +708,114 @@ module.exports = class API {
         });
     }
 
-    CreateUserBillingInput = ["billingName", "dateValue", "id_aggrement", "id", "email", "payed", "id_identity"];
-    CreateUserBilling({ billingName, dateValue, id_aggrement, id, email, payed, id_identity }) {
-        let url = this._driver.opaqueURL(["", "billings", "users", encodeURIComponent(email)].join("/"));
+    CreateUserBillingInput = ["billingName", "dateValue", "id_aggrement", "id", "email", "payed", "id_identity", "input_email"];
+    CreateUserBilling({ billingName, dateValue, id_aggrement, id, email, payed, id_identity, input_email }) {
+        let url = this._driver.opaqueURL(["", "billings", "users", encodeURIComponent(input_email)].join("/"));
         return this._driver.sendPost({
-            data: { billingName, dateValue, id_aggrement, id, email, payed, id_identity },
+            data: { billingName, dateValue, id_aggrement, id, email, payed, id_identity, input_email },
+            endpoint: url.toString(),
+        });
+    }
+
+    CreateDealChangesInput = ["id_deal_change", "id_deal", "email", "previous", "created_at"];
+    CreateDealChanges({ id_deal_change, id_deal, email, previous, created_at }) {
+        let url = this._driver.opaqueURL("/deal-changes");
+        return this._driver.sendPost({
+            data: { id_deal_change, id_deal, email, previous, created_at },
+            endpoint: url.toString(),
+        });
+    }
+
+    DeleteDealChangesInput = ["id_deal_change", "id_deal", "email", "previous", "created_at"];
+    DeleteDealChanges({ id_deal_change, id_deal, email, previous, created_at }) {
+        let url = this._driver.opaqueURL("/deal-changes");
+        return this._driver.sendDelete({
+            data: { id_deal_change, id_deal, email, previous, created_at },
+            endpoint: url.toString(),
+        });
+    }
+
+    ListDealChangesInput = ["id_deal_change", "id_deal", "email", "previous", "created_at"];
+    ListDealChanges({ id_deal_change, id_deal, email, previous, created_at }) {
+        let url = this._driver.opaqueURL(["", "deal-changes"].join("/"));
+        if (id_deal_change) url.searchParams.set("id_deal_change", id_deal_change);
+        if (id_deal) url.searchParams.set("id_deal", id_deal);
+        if (email) url.searchParams.set("email", email);
+        if (previous) url.searchParams.set("previous", previous);
+        if (created_at) url.searchParams.set("created_at", created_at);
+
+        return this._driver.sendGet({
+            endpoint: url.toString(),
+        });
+    }
+
+    UpdateDealChangesInput = ["id_deal_change", "id_deal", "email", "previous", "created_at"];
+    UpdateDealChanges({ id_deal_change, id_deal, email, previous, created_at }) {
+        let url = this._driver.opaqueURL("/deal-changes");
+        return this._driver.sendPut({
+            data: { id_deal_change, id_deal, email, previous, created_at },
+            endpoint: url.toString(),
+        });
+    }
+
+    CreateDealsInput = ["id_deal", "id_partner", "id_user", "company_name", "tax_number", "address", "zip_code", "city", "licenses", "global_price", "partner_price", "is_m365", "pdf_link", "first_name", "last_name", "email", "phone", "country", "description", "source", "created_at", "state", "is_frozen", "estimated_close", "contact_role", "is_decision_maker"];
+    CreateDeals({ id_deal, id_partner, id_user, company_name, tax_number, address, zip_code, city, licenses, global_price, partner_price, is_m365, pdf_link, first_name, last_name, email, phone, country, description, source, created_at, state, is_frozen, estimated_close, contact_role, is_decision_maker }) {
+        let url = this._driver.opaqueURL("/deals");
+        return this._driver.sendPost({
+            data: { id_deal, id_partner, id_user, company_name, tax_number, address, zip_code, city, licenses, global_price, partner_price, is_m365, pdf_link, first_name, last_name, email, phone, country, description, source, created_at, state, is_frozen, estimated_close, contact_role, is_decision_maker },
+            endpoint: url.toString(),
+        });
+    }
+
+    DeleteDealsInput = ["id_deal", "id_partner", "id_user", "company_name", "tax_number", "address", "zip_code", "city", "licenses", "global_price", "partner_price", "is_m365", "pdf_link", "first_name", "last_name", "email", "phone", "country", "description", "source", "created_at", "state", "is_frozen", "estimated_close", "contact_role", "is_decision_maker"];
+    DeleteDeals({ id_deal, id_partner, id_user, company_name, tax_number, address, zip_code, city, licenses, global_price, partner_price, is_m365, pdf_link, first_name, last_name, email, phone, country, description, source, created_at, state, is_frozen, estimated_close, contact_role, is_decision_maker }) {
+        let url = this._driver.opaqueURL("/deals");
+        return this._driver.sendDelete({
+            data: { id_deal, id_partner, id_user, company_name, tax_number, address, zip_code, city, licenses, global_price, partner_price, is_m365, pdf_link, first_name, last_name, email, phone, country, description, source, created_at, state, is_frozen, estimated_close, contact_role, is_decision_maker },
+            endpoint: url.toString(),
+        });
+    }
+
+    ListDealsInput = ["id_deal", "id_partner", "id_user", "company_name", "tax_number", "address", "zip_code", "city", "licenses", "global_price", "partner_price", "is_m365", "pdf_link", "first_name", "last_name", "email", "phone", "country", "description", "source", "created_at", "state", "is_frozen", "estimated_close", "contact_role", "is_decision_maker"];
+    ListDeals({ id_deal, id_partner, id_user, company_name, tax_number, address, zip_code, city, licenses, global_price, partner_price, is_m365, pdf_link, first_name, last_name, email, phone, country, description, source, created_at, state, is_frozen, estimated_close, contact_role, is_decision_maker }) {
+        let url = this._driver.opaqueURL(["", "deals"].join("/"));
+        if (id_deal) url.searchParams.set("id_deal", id_deal);
+        if (id_partner) url.searchParams.set("id_partner", id_partner);
+        if (id_user) url.searchParams.set("id_user", id_user);
+        if (company_name) url.searchParams.set("company_name", company_name);
+        if (tax_number) url.searchParams.set("tax_number", tax_number);
+        if (address) url.searchParams.set("address", address);
+        if (zip_code) url.searchParams.set("zip_code", zip_code);
+        if (city) url.searchParams.set("city", city);
+        if (licenses) url.searchParams.set("licenses", licenses);
+        if (global_price) url.searchParams.set("global_price", global_price);
+        if (partner_price) url.searchParams.set("partner_price", partner_price);
+        if (is_m365) url.searchParams.set("is_m365", is_m365);
+        if (pdf_link) url.searchParams.set("pdf_link", pdf_link);
+        if (first_name) url.searchParams.set("first_name", first_name);
+        if (last_name) url.searchParams.set("last_name", last_name);
+        if (email) url.searchParams.set("email", email);
+        if (phone) url.searchParams.set("phone", phone);
+        if (country) url.searchParams.set("country", country);
+        if (description) url.searchParams.set("description", description);
+        if (source) url.searchParams.set("source", source);
+        if (created_at) url.searchParams.set("created_at", created_at);
+        if (state) url.searchParams.set("state", state);
+        if (is_frozen) url.searchParams.set("is_frozen", is_frozen);
+        if (estimated_close) url.searchParams.set("estimated_close", estimated_close);
+        if (contact_role) url.searchParams.set("contact_role", contact_role);
+        if (is_decision_maker) url.searchParams.set("is_decision_maker", is_decision_maker);
+
+        return this._driver.sendGet({
+            endpoint: url.toString(),
+        });
+    }
+
+    UpdateDealsInput = ["id_deal", "id_partner", "id_user", "company_name", "tax_number", "address", "zip_code", "city", "licenses", "global_price", "partner_price", "is_m365", "pdf_link", "first_name", "last_name", "email", "phone", "country", "description", "source", "created_at", "state", "is_frozen", "estimated_close", "contact_role", "is_decision_maker"];
+    UpdateDeals({ id_deal, id_partner, id_user, company_name, tax_number, address, zip_code, city, licenses, global_price, partner_price, is_m365, pdf_link, first_name, last_name, email, phone, country, description, source, created_at, state, is_frozen, estimated_close, contact_role, is_decision_maker }) {
+        let url = this._driver.opaqueURL("/deals");
+        return this._driver.sendPut({
+            data: { id_deal, id_partner, id_user, company_name, tax_number, address, zip_code, city, licenses, global_price, partner_price, is_m365, pdf_link, first_name, last_name, email, phone, country, description, source, created_at, state, is_frozen, estimated_close, contact_role, is_decision_maker },
             endpoint: url.toString(),
         });
     }
@@ -708,10 +873,11 @@ module.exports = class API {
         });
     }
 
-    DeleteMineDomain(input) {
+    DeleteMineDomainInput = ["domain"];
+    DeleteMineDomain({ domain }) {
         let url = this._driver.opaqueURL("/domain-registration");
         return this._driver.sendDelete({
-            data: input,
+            data: { domain },
             endpoint: url.toString(),
         });
     }
@@ -734,10 +900,11 @@ module.exports = class API {
         });
     }
 
-    DeletePost(input) {
+    DeletePostInput = ["id_post"];
+    DeletePost({ id_post }) {
         let url = this._driver.opaqueURL("/posts");
         return this._driver.sendDelete({
-            data: input,
+            data: { id_post },
             endpoint: url.toString(),
         });
     }
@@ -862,10 +1029,11 @@ module.exports = class API {
         });
     }
 
-    EnableDevSupport(input) {
+    EnableDevSupportInput = ["dev_enabled"];
+    EnableDevSupport({ dev_enabled }) {
         let url = this._driver.opaqueURL("/users/me/developer");
         return this._driver.sendPut({
-            data: input,
+            data: { dev_enabled },
             endpoint: url.toString(),
         });
     }
@@ -883,6 +1051,47 @@ module.exports = class API {
         let url = this._driver.opaqueURL("/trainings/tutorial/end");
         return this._driver.sendPost({
             data: input,
+            endpoint: url.toString(),
+        });
+    }
+
+    CreateEventInput = ["id_event", "id_user", "id_identity", "key", "value"];
+    CreateEvent({ id_event, id_user, id_identity, key, value }) {
+        let url = this._driver.opaqueURL("/events");
+        return this._driver.sendPost({
+            data: { id_event, id_user, id_identity, key, value },
+            endpoint: url.toString(),
+        });
+    }
+
+    DeleteEventInput = ["id_event", "id_user", "id_identity", "key", "value"];
+    DeleteEvent({ id_event, id_user, id_identity, key, value }) {
+        let url = this._driver.opaqueURL("/events");
+        return this._driver.sendDelete({
+            data: { id_event, id_user, id_identity, key, value },
+            endpoint: url.toString(),
+        });
+    }
+
+    ListEventInput = ["id_event", "id_user", "id_identity", "key", "value"];
+    ListEvent({ id_event, id_user, id_identity, key, value }) {
+        let url = this._driver.opaqueURL(["", "events"].join("/"));
+        if (id_event) url.searchParams.set("id_event", id_event);
+        if (id_user) url.searchParams.set("id_user", id_user);
+        if (id_identity) url.searchParams.set("id_identity", id_identity);
+        if (key) url.searchParams.set("key", key);
+        if (value) url.searchParams.set("value", value);
+
+        return this._driver.sendGet({
+            endpoint: url.toString(),
+        });
+    }
+
+    UpdateEventInput = ["id_event", "id_user", "id_identity", "key", "value"];
+    UpdateEvent({ id_event, id_user, id_identity, key, value }) {
+        let url = this._driver.opaqueURL("/events");
+        return this._driver.sendPut({
+            data: { id_event, id_user, id_identity, key, value },
             endpoint: url.toString(),
         });
     }
@@ -972,10 +1181,11 @@ module.exports = class API {
         });
     }
 
-    GetCustomUserUsedTrainings(input) {
+    GetCustomUserUsedTrainingsInput = ["id_identity"];
+    GetCustomUserUsedTrainings({ id_identity }) {
         let url = this._driver.opaqueURL("/users/trainings-count-admin");
         return this._driver.sendPost({
-            data: input,
+            data: { id_identity },
             endpoint: url.toString(),
         });
     }
@@ -998,7 +1208,8 @@ module.exports = class API {
         });
     }
 
-    GetDeveloperSupport() {
+    GetDeveloperSupportInput = ["dev_enabled"];
+    GetDeveloperSupport({ dev_enabled }) {
         let url = this._driver.opaqueURL("/users/me/developer");
 
         return this._driver.sendGet({
@@ -1049,10 +1260,11 @@ module.exports = class API {
         });
     }
 
-    GetInformationAboutCompany(input) {
+    GetInformationAboutCompanyInput = ["id"];
+    GetInformationAboutCompany({ id }) {
         let url = this._driver.opaqueURL("/company/info");
         return this._driver.sendPost({
-            data: input,
+            data: { id },
             endpoint: url.toString(),
         });
     }
@@ -1226,10 +1438,11 @@ module.exports = class API {
         });
     }
 
-    GetUsersOfCompany(input) {
+    GetUsersOfCompanyInput = ["id"];
+    GetUsersOfCompany({ id }) {
         let url = this._driver.opaqueURL("/company/users");
         return this._driver.sendPost({
-            data: input,
+            data: { id },
             endpoint: url.toString(),
         });
     }
@@ -1703,10 +1916,11 @@ module.exports = class API {
         });
     }
 
-    ListTrainingsHavingEmployee(input) {
+    ListTrainingsHavingEmployeeInput = ["id_data"];
+    ListTrainingsHavingEmployee({ id_data }) {
         let url = this._driver.opaqueURL("/trainings/list-by-employee");
         return this._driver.sendPost({
-            data: input,
+            data: { id_data },
             endpoint: url.toString(),
         });
     }
@@ -1727,26 +1941,29 @@ module.exports = class API {
         });
     }
 
-    Login(input) {
+    LoginInput = ["username", "password", "token"];
+    Login({ username, password, token }) {
         let url = this._driver.opaqueURL("/users/login");
         return this._driver.sendPost({
-            data: input,
+            data: { username, password, token },
             endpoint: url.toString(),
         });
     }
 
-    LoginAsEmployeeViaAccessToken(input) {
+    LoginAsEmployeeViaAccessTokenInput = ["accessToken"];
+    LoginAsEmployeeViaAccessToken({ accessToken }) {
         let url = this._driver.opaqueURL("/trainings/login-token");
         return this._driver.sendPost({
-            data: input,
+            data: { accessToken },
             endpoint: url.toString(),
         });
     }
 
-    LoginForTraining(input) {
+    LoginForTrainingInput = ["id_template_queue", "password"];
+    LoginForTraining({ id_template_queue, password }) {
         let url = this._driver.opaqueURL("/trainings/login");
         return this._driver.sendPost({
-            data: input,
+            data: { id_template_queue, password },
             endpoint: url.toString(),
         });
     }
@@ -1816,10 +2033,91 @@ module.exports = class API {
         });
     }
 
-    OverrideUserInfo(input) {
+    OverrideUserInfoInput = ["id_identity", "company", "address", "nip", "regon", "phone_number"];
+    OverrideUserInfo({ id_identity, company, address, nip, regon, phone_number }) {
         let url = this._driver.opaqueURL("/identities/info");
         return this._driver.sendPost({
-            data: input,
+            data: { id_identity, company, address, nip, regon, phone_number },
+            endpoint: url.toString(),
+        });
+    }
+
+    CreatePartnerInput = ["id_partner", "name", "id_pricing"];
+    CreatePartner({ id_partner, name, id_pricing }) {
+        let url = this._driver.opaqueURL("/partners");
+        return this._driver.sendPost({
+            data: { id_partner, name, id_pricing },
+            endpoint: url.toString(),
+        });
+    }
+
+    DeletePartnerInput = ["id_partner", "name", "id_pricing"];
+    DeletePartner({ id_partner, name, id_pricing }) {
+        let url = this._driver.opaqueURL("/partners");
+        return this._driver.sendDelete({
+            data: { id_partner, name, id_pricing },
+            endpoint: url.toString(),
+        });
+    }
+
+    ListPartnerInput = ["id_partner", "name", "id_pricing"];
+    ListPartner({ id_partner, name, id_pricing }) {
+        let url = this._driver.opaqueURL(["", "partners"].join("/"));
+        if (id_partner) url.searchParams.set("id_partner", id_partner);
+        if (name) url.searchParams.set("name", name);
+        if (id_pricing) url.searchParams.set("id_pricing", id_pricing);
+
+        return this._driver.sendGet({
+            endpoint: url.toString(),
+        });
+    }
+
+    UpdatePartnerInput = ["id_partner", "name", "id_pricing"];
+    UpdatePartner({ id_partner, name, id_pricing }) {
+        let url = this._driver.opaqueURL("/partners");
+        return this._driver.sendPut({
+            data: { id_partner, name, id_pricing },
+            endpoint: url.toString(),
+        });
+    }
+
+    CreatePartnershipInput = ["id_partnership", "user_role", "id_user", "id_partner", "is_default"];
+    CreatePartnership({ id_partnership, user_role, id_user, id_partner, is_default }) {
+        let url = this._driver.opaqueURL("/partnership");
+        return this._driver.sendPost({
+            data: { id_partnership, user_role, id_user, id_partner, is_default },
+            endpoint: url.toString(),
+        });
+    }
+
+    DeletePartnershipInput = ["id_partnership", "user_role", "id_user", "id_partner", "is_default"];
+    DeletePartnership({ id_partnership, user_role, id_user, id_partner, is_default }) {
+        let url = this._driver.opaqueURL("/partnership");
+        return this._driver.sendDelete({
+            data: { id_partnership, user_role, id_user, id_partner, is_default },
+            endpoint: url.toString(),
+        });
+    }
+
+    ListPartnershipInput = ["id_partnership", "user_role", "id_user", "id_partner", "is_default"];
+    ListPartnership({ id_partnership, user_role, id_user, id_partner, is_default }) {
+        let url = this._driver.opaqueURL(["", "partnership"].join("/"));
+        if (id_partnership) url.searchParams.set("id_partnership", id_partnership);
+        if (user_role) url.searchParams.set("user_role", user_role);
+        if (id_user) url.searchParams.set("id_user", id_user);
+        if (id_partner) url.searchParams.set("id_partner", id_partner);
+        if (is_default) url.searchParams.set("is_default", is_default);
+
+        return this._driver.sendGet({
+            endpoint: url.toString(),
+        });
+    }
+
+    UpdatePartnershipInput = ["id_partnership", "user_role", "id_user", "id_partner", "is_default"];
+    UpdatePartnership({ id_partnership, user_role, id_user, id_partner, is_default }) {
+        let url = this._driver.opaqueURL("/partnership");
+        return this._driver.sendPut({
+            data: { id_partnership, user_role, id_user, id_partner, is_default },
             endpoint: url.toString(),
         });
     }
@@ -1830,6 +2128,90 @@ module.exports = class API {
         if (id) url.searchParams.set("id", id);
 
         return this._driver.sendGet({
+            endpoint: url.toString(),
+        });
+    }
+
+    CreatePricingInput = ["id_pricing", "name", "pricelist", "is_public", "minimum_to_buy", "is_global"];
+    CreatePricing({ id_pricing, name, pricelist, is_public, minimum_to_buy, is_global }) {
+        let url = this._driver.opaqueURL("/pricing");
+        return this._driver.sendPost({
+            data: { id_pricing, name, pricelist, is_public, minimum_to_buy, is_global },
+            endpoint: url.toString(),
+        });
+    }
+
+    DeletePricingInput = ["id_pricing", "name", "pricelist", "is_public", "minimum_to_buy", "is_global"];
+    DeletePricing({ id_pricing, name, pricelist, is_public, minimum_to_buy, is_global }) {
+        let url = this._driver.opaqueURL("/pricing");
+        return this._driver.sendDelete({
+            data: { id_pricing, name, pricelist, is_public, minimum_to_buy, is_global },
+            endpoint: url.toString(),
+        });
+    }
+
+    ListPricingInput = ["id_pricing", "name", "pricelist", "is_public", "minimum_to_buy", "is_global"];
+    ListPricing({ id_pricing, name, pricelist, is_public, minimum_to_buy, is_global }) {
+        let url = this._driver.opaqueURL(["", "pricing"].join("/"));
+        if (id_pricing) url.searchParams.set("id_pricing", id_pricing);
+        if (name) url.searchParams.set("name", name);
+        if (pricelist) url.searchParams.set("pricelist", pricelist);
+        if (is_public) url.searchParams.set("is_public", is_public);
+        if (minimum_to_buy) url.searchParams.set("minimum_to_buy", minimum_to_buy);
+        if (is_global) url.searchParams.set("is_global", is_global);
+
+        return this._driver.sendGet({
+            endpoint: url.toString(),
+        });
+    }
+
+    UpdatePricingInput = ["id_pricing", "name", "pricelist", "is_public", "minimum_to_buy", "is_global"];
+    UpdatePricing({ id_pricing, name, pricelist, is_public, minimum_to_buy, is_global }) {
+        let url = this._driver.opaqueURL("/pricing");
+        return this._driver.sendPut({
+            data: { id_pricing, name, pricelist, is_public, minimum_to_buy, is_global },
+            endpoint: url.toString(),
+        });
+    }
+
+    CreateQuizAnswersInput = ["id_quiz_answers", "id_post", "id_user", "answer", "created_at", "is_correct"];
+    CreateQuizAnswers({ id_quiz_answers, id_post, id_user, answer, created_at, is_correct }) {
+        let url = this._driver.opaqueURL("/quiz-answers");
+        return this._driver.sendPost({
+            data: { id_quiz_answers, id_post, id_user, answer, created_at, is_correct },
+            endpoint: url.toString(),
+        });
+    }
+
+    DeleteQuizAnswersInput = ["id_quiz_answers", "id_post", "id_user", "answer", "created_at", "is_correct"];
+    DeleteQuizAnswers({ id_quiz_answers, id_post, id_user, answer, created_at, is_correct }) {
+        let url = this._driver.opaqueURL("/quiz-answers");
+        return this._driver.sendDelete({
+            data: { id_quiz_answers, id_post, id_user, answer, created_at, is_correct },
+            endpoint: url.toString(),
+        });
+    }
+
+    ListQuizAnswersInput = ["id_quiz_answers", "id_post", "id_user", "answer", "created_at", "is_correct"];
+    ListQuizAnswers({ id_quiz_answers, id_post, id_user, answer, created_at, is_correct }) {
+        let url = this._driver.opaqueURL(["", "quiz-answers"].join("/"));
+        if (id_quiz_answers) url.searchParams.set("id_quiz_answers", id_quiz_answers);
+        if (id_post) url.searchParams.set("id_post", id_post);
+        if (id_user) url.searchParams.set("id_user", id_user);
+        if (answer) url.searchParams.set("answer", answer);
+        if (created_at) url.searchParams.set("created_at", created_at);
+        if (is_correct) url.searchParams.set("is_correct", is_correct);
+
+        return this._driver.sendGet({
+            endpoint: url.toString(),
+        });
+    }
+
+    UpdateQuizAnswersInput = ["id_quiz_answers", "id_post", "id_user", "answer", "created_at", "is_correct"];
+    UpdateQuizAnswers({ id_quiz_answers, id_post, id_user, answer, created_at, is_correct }) {
+        let url = this._driver.opaqueURL("/quiz-answers");
+        return this._driver.sendPut({
+            data: { id_quiz_answers, id_post, id_user, answer, created_at, is_correct },
             endpoint: url.toString(),
         });
     }
@@ -2000,10 +2382,11 @@ module.exports = class API {
         });
     }
 
-    RegisterClickOnTrainingEnter(input) {
+    RegisterClickOnTrainingEnterInput = ["id_template_queue", "password"];
+    RegisterClickOnTrainingEnter({ id_template_queue, password }) {
         let url = this._driver.opaqueURL("/trainings/enter");
         return this._driver.sendPost({
-            data: input,
+            data: { id_template_queue, password },
             endpoint: url.toString(),
         });
     }
@@ -2051,10 +2434,10 @@ module.exports = class API {
         });
     }
 
-    ReportSpeakInput = ["id", "priority"];
-    ReportSpeak({ id, priority }) {
-        let url = this._driver.opaqueURL(["", "reports", encodeURIComponent(id), "say-it"].join("/"));
-        if (id) url.searchParams.set("id", id);
+    ReportSpeakInput = ["id", "priority", "report_id"];
+    ReportSpeak({ id, priority, report_id }) {
+        let url = this._driver.opaqueURL(["", "reports", encodeURIComponent(report_id), "say-it"].join("/"));
+        if (report_id) url.searchParams.set("report_id", report_id);
 
         return this._driver.sendGet({
             endpoint: url.toString(),
@@ -2079,18 +2462,20 @@ module.exports = class API {
         });
     }
 
-    ResetPassword(input) {
+    ResetPasswordInput = ["username", "password", "token", "id_template_queue", "training_password"];
+    ResetPassword({ username, password, token, id_template_queue, training_password }) {
         let url = this._driver.opaqueURL("/users/reset");
         return this._driver.sendPost({
-            data: input,
+            data: { username, password, token, id_template_queue, training_password },
             endpoint: url.toString(),
         });
     }
 
-    ResetPasswordRequest(input) {
+    ResetPasswordRequestInput = ["email"];
+    ResetPasswordRequest({ email }) {
         let url = this._driver.opaqueURL("/users/reset");
         return this._driver.sendPut({
-            data: input,
+            data: { email },
             endpoint: url.toString(),
         });
     }
@@ -2104,10 +2489,11 @@ module.exports = class API {
         });
     }
 
-    RunAudit(input) {
+    RunAuditInput = ["id"];
+    RunAudit({ id }) {
         let url = this._driver.opaqueURL("/audits/run");
         return this._driver.sendPost({
-            data: input,
+            data: { id },
             endpoint: url.toString(),
         });
     }
@@ -2120,42 +2506,47 @@ module.exports = class API {
         });
     }
 
-    SetGlobalPricing(input) {
+    SetGlobalPricingInput = ["id_pricing"];
+    SetGlobalPricing({ id_pricing }) {
         let url = this._driver.opaqueURL("/pricing/global");
         return this._driver.sendPut({
-            data: input,
+            data: { id_pricing },
             endpoint: url.toString(),
         });
     }
 
-    SetMyLanguage(input) {
+    SetMyLanguageInput = ["lang"];
+    SetMyLanguage({ lang }) {
         let url = this._driver.opaqueURL("/users/me/language");
         return this._driver.sendPut({
-            data: input,
+            data: { lang },
             endpoint: url.toString(),
         });
     }
 
-    SetNewPassword(input) {
+    SetNewPasswordInput = ["oldPassword", "newPassword"];
+    SetNewPassword({ oldPassword, newPassword }) {
         let url = this._driver.opaqueURL("/users/new-password");
         return this._driver.sendPost({
-            data: input,
+            data: { oldPassword, newPassword },
             endpoint: url.toString(),
         });
     }
 
-    SetPersonalData(input) {
+    SetPersonalDataInput = ["first_name", "last_name"];
+    SetPersonalData({ first_name, last_name }) {
         let url = this._driver.opaqueURL("/users/me/name");
         return this._driver.sendPut({
-            data: input,
+            data: { first_name, last_name },
             endpoint: url.toString(),
         });
     }
 
-    SetTrustOfTemplate(input) {
+    SetTrustOfTemplateInput = ["id_template", "isTrusted"];
+    SetTrustOfTemplate({ id_template, isTrusted }) {
         let url = this._driver.opaqueURL("/templates/trust");
         return this._driver.sendPut({
-            data: input,
+            data: { id_template, isTrusted },
             endpoint: url.toString(),
         });
     }
@@ -2169,10 +2560,11 @@ module.exports = class API {
         });
     }
 
-    SetWorkspaceSettings(input) {
+    SetWorkspaceSettingsInput = ["pro"];
+    SetWorkspaceSettings({ pro }) {
         let url = this._driver.opaqueURL("/users/workspace");
         return this._driver.sendPost({
-            data: input,
+            data: { pro },
             endpoint: url.toString(),
         });
     }
@@ -2194,26 +2586,77 @@ module.exports = class API {
         });
     }
 
-    SwapPosts(input) {
+    CreateSupportInput = ["id_support_ticket", "id_user_responsibility", "id_identity", "type", "text", "id_user", "module", "impact", "title", "state", "closed_at", "first_response_time"];
+    CreateSupport({ id_support_ticket, id_user_responsibility, id_identity, type, text, id_user, module, impact, title, state, closed_at, first_response_time }) {
+        let url = this._driver.opaqueURL("/support-tickets");
+        return this._driver.sendPost({
+            data: { id_support_ticket, id_user_responsibility, id_identity, type, text, id_user, module, impact, title, state, closed_at, first_response_time },
+            endpoint: url.toString(),
+        });
+    }
+
+    DeleteSupportInput = ["id_support_ticket", "id_user_responsibility", "id_identity", "type", "text", "id_user", "module", "impact", "title", "state", "closed_at", "first_response_time"];
+    DeleteSupport({ id_support_ticket, id_user_responsibility, id_identity, type, text, id_user, module, impact, title, state, closed_at, first_response_time }) {
+        let url = this._driver.opaqueURL("/support-tickets");
+        return this._driver.sendDelete({
+            data: { id_support_ticket, id_user_responsibility, id_identity, type, text, id_user, module, impact, title, state, closed_at, first_response_time },
+            endpoint: url.toString(),
+        });
+    }
+
+    ListSupportInput = ["id_support_ticket", "id_user_responsibility", "id_identity", "type", "text", "id_user", "module", "impact", "title", "state", "closed_at", "first_response_time"];
+    ListSupport({ id_support_ticket, id_user_responsibility, id_identity, type, text, id_user, module, impact, title, state, closed_at, first_response_time }) {
+        let url = this._driver.opaqueURL(["", "support-tickets"].join("/"));
+        if (id_support_ticket) url.searchParams.set("id_support_ticket", id_support_ticket);
+        if (id_user_responsibility) url.searchParams.set("id_user_responsibility", id_user_responsibility);
+        if (id_identity) url.searchParams.set("id_identity", id_identity);
+        if (type) url.searchParams.set("type", type);
+        if (text) url.searchParams.set("text", text);
+        if (id_user) url.searchParams.set("id_user", id_user);
+        if (module) url.searchParams.set("module", module);
+        if (impact) url.searchParams.set("impact", impact);
+        if (title) url.searchParams.set("title", title);
+        if (state) url.searchParams.set("state", state);
+        if (closed_at) url.searchParams.set("closed_at", closed_at);
+        if (first_response_time) url.searchParams.set("first_response_time", first_response_time);
+
+        return this._driver.sendGet({
+            endpoint: url.toString(),
+        });
+    }
+
+    UpdateSupportInput = ["id_support_ticket", "id_user_responsibility", "id_identity", "type", "text", "id_user", "module", "impact", "title", "state", "closed_at", "first_response_time"];
+    UpdateSupport({ id_support_ticket, id_user_responsibility, id_identity, type, text, id_user, module, impact, title, state, closed_at, first_response_time }) {
+        let url = this._driver.opaqueURL("/support-tickets");
+        return this._driver.sendPut({
+            data: { id_support_ticket, id_user_responsibility, id_identity, type, text, id_user, module, impact, title, state, closed_at, first_response_time },
+            endpoint: url.toString(),
+        });
+    }
+
+    SwapPostsInput = ["topPostId", "bottomPostId"];
+    SwapPosts({ topPostId, bottomPostId }) {
         let url = this._driver.opaqueURL("/posts/swap");
         return this._driver.sendPut({
-            data: input,
+            data: { topPostId, bottomPostId },
             endpoint: url.toString(),
         });
     }
 
-    SwitchIdentity(input) {
+    SwitchIdentityInput = ["id_identity"];
+    SwitchIdentity({ id_identity }) {
         let url = this._driver.opaqueURL("/identities/switch");
         return this._driver.sendPost({
-            data: input,
+            data: { id_identity },
             endpoint: url.toString(),
         });
     }
 
-    SwitchPartnership(input) {
+    SwitchPartnershipInput = ["id_partner"];
+    SwitchPartnership({ id_partner }) {
         let url = this._driver.opaqueURL("/partnership/switch");
         return this._driver.sendPost({
-            data: input,
+            data: { id_partner },
             endpoint: url.toString(),
         });
     }
@@ -2244,18 +2687,62 @@ module.exports = class API {
         });
     }
 
-    TestTransport(input) {
+    TestTransportInput = ["id_mail_transport", "target"];
+    TestTransport({ id_mail_transport, target }) {
         let url = this._driver.opaqueURL("/transports/test");
         return this._driver.sendPost({
-            data: input,
+            data: { id_mail_transport, target },
             endpoint: url.toString(),
         });
     }
 
-    TrainingAccountInfo(input) {
+    CreateThreatsInput = ["id_threat", "id_identity", "id_user", "sender", "title", "body"];
+    CreateThreats({ id_threat, id_identity, id_user, sender, title, body }) {
+        let url = this._driver.opaqueURL("/threats");
+        return this._driver.sendPost({
+            data: { id_threat, id_identity, id_user, sender, title, body },
+            endpoint: url.toString(),
+        });
+    }
+
+    DeleteThreatsInput = ["id_threat", "id_identity", "id_user", "sender", "title", "body"];
+    DeleteThreats({ id_threat, id_identity, id_user, sender, title, body }) {
+        let url = this._driver.opaqueURL("/threats");
+        return this._driver.sendDelete({
+            data: { id_threat, id_identity, id_user, sender, title, body },
+            endpoint: url.toString(),
+        });
+    }
+
+    ListThreatsInput = ["id_threat", "id_identity", "id_user", "sender", "title", "body"];
+    ListThreats({ id_threat, id_identity, id_user, sender, title, body }) {
+        let url = this._driver.opaqueURL(["", "threats"].join("/"));
+        if (id_threat) url.searchParams.set("id_threat", id_threat);
+        if (id_identity) url.searchParams.set("id_identity", id_identity);
+        if (id_user) url.searchParams.set("id_user", id_user);
+        if (sender) url.searchParams.set("sender", sender);
+        if (title) url.searchParams.set("title", title);
+        if (body) url.searchParams.set("body", body);
+
+        return this._driver.sendGet({
+            endpoint: url.toString(),
+        });
+    }
+
+    UpdateThreatsInput = ["id_threat", "id_identity", "id_user", "sender", "title", "body"];
+    UpdateThreats({ id_threat, id_identity, id_user, sender, title, body }) {
+        let url = this._driver.opaqueURL("/threats");
+        return this._driver.sendPut({
+            data: { id_threat, id_identity, id_user, sender, title, body },
+            endpoint: url.toString(),
+        });
+    }
+
+    TrainingAccountInfoInput = ["id_template_queue", "password"];
+    TrainingAccountInfo({ id_template_queue, password }) {
         let url = this._driver.opaqueURL("/trainings/account-info");
         return this._driver.sendPost({
-            data: input,
+            data: { id_template_queue, password },
             endpoint: url.toString(),
         });
     }
@@ -2276,10 +2763,11 @@ module.exports = class API {
         });
     }
 
-    TrainingLeaderboardForClient(input) {
+    TrainingLeaderboardForClientInput = ["id_audit"];
+    TrainingLeaderboardForClient({ id_audit }) {
         let url = this._driver.opaqueURL("/trainings/audit-leaderboard");
         return this._driver.sendPost({
-            data: input,
+            data: { id_audit },
             endpoint: url.toString(),
         });
     }
@@ -2346,10 +2834,11 @@ module.exports = class API {
         });
     }
 
-    UpdateDataPoolOfCompany(input) {
+    UpdateDataPoolOfCompanyInput = ["id_identity", "data_pool"];
+    UpdateDataPoolOfCompany({ id_identity, data_pool }) {
         let url = this._driver.opaqueURL("/company/data-pool");
         return this._driver.sendPut({
-            data: input,
+            data: { id_identity, data_pool },
             endpoint: url.toString(),
         });
     }
@@ -2371,10 +2860,11 @@ module.exports = class API {
         });
     }
 
-    UpdateFlowItem(input) {
+    UpdateFlowItemInput = ["id_flow_items", "id_flow", "id_mail_transport", "name", "days_offset", "type", "hour_start", "hour_end", "schedule_policy", "redirect_to_training", "template_id", "extensions"];
+    UpdateFlowItem({ id_flow_items, id_flow, id_mail_transport, name, days_offset, type, hour_start, hour_end, schedule_policy, redirect_to_training, template_id, extensions }) {
         let url = this._driver.opaqueURL("/flow/items");
         return this._driver.sendPut({
-            data: input,
+            data: { id_flow_items, id_flow, id_mail_transport, name, days_offset, type, hour_start, hour_end, schedule_policy, redirect_to_training, template_id, extensions },
             endpoint: url.toString(),
         });
     }
@@ -2387,10 +2877,11 @@ module.exports = class API {
         });
     }
 
-    UpdateMjmlOfPublicTemplate(input) {
+    UpdateMjmlOfPublicTemplateInput = ["id", "code"];
+    UpdateMjmlOfPublicTemplate({ id, code }) {
         let url = this._driver.opaqueURL("/templates/public-mjml");
         return this._driver.sendPut({
-            data: input,
+            data: { id, code },
             endpoint: url.toString(),
         });
     }
@@ -2404,10 +2895,11 @@ module.exports = class API {
         });
     }
 
-    UpdatePost(input) {
+    UpdatePostInput = ["quiz", "quiz_answer", "id_post", "id_category", "id_author", "id_course", "text", "image", "lang", "ref", "order", "video"];
+    UpdatePost({ quiz, quiz_answer, id_post, id_category, id_author, id_course, text, image, lang, ref, order, video }) {
         let url = this._driver.opaqueURL("/posts");
         return this._driver.sendPut({
-            data: input,
+            data: { quiz, quiz_answer, id_post, id_category, id_author, id_course, text, image, lang, ref, order, video },
             endpoint: url.toString(),
         });
     }
@@ -2439,18 +2931,20 @@ module.exports = class API {
         });
     }
 
-    UpdateSyncProfiles(input) {
+    UpdateSyncProfilesInput = ["cron", "id_sync_profiles"];
+    UpdateSyncProfiles({ cron, id_sync_profiles }) {
         let url = this._driver.opaqueURL("/sync-profiles");
         return this._driver.sendPut({
-            data: input,
+            data: { cron, id_sync_profiles },
             endpoint: url.toString(),
         });
     }
 
-    UpdateTag(input) {
+    UpdateTagInput = ["id", "name"];
+    UpdateTag({ id, name }) {
         let url = this._driver.opaqueURL("/tags");
         return this._driver.sendPut({
-            data: input,
+            data: { id, name },
             endpoint: url.toString(),
         });
     }
@@ -2482,26 +2976,29 @@ module.exports = class API {
         });
     }
 
-    UpdateTermsOfUseDate(input) {
+    UpdateTermsOfUseDateInput = ["terms"];
+    UpdateTermsOfUseDate({ terms }) {
         let url = this._driver.opaqueURL("/app-settings/terms-of-use");
         return this._driver.sendPost({
-            data: input,
+            data: { terms },
             endpoint: url.toString(),
         });
     }
 
-    UpdateTurnoverOfCompany(input) {
+    UpdateTurnoverOfCompanyInput = ["id_identity", "turnover"];
+    UpdateTurnoverOfCompany({ id_identity, turnover }) {
         let url = this._driver.opaqueURL("/company/turnover");
         return this._driver.sendPut({
-            data: input,
+            data: { id_identity, turnover },
             endpoint: url.toString(),
         });
     }
 
-    UpdateTypeOfCompany(input) {
+    UpdateTypeOfCompanyInput = ["id", "type"];
+    UpdateTypeOfCompany({ id, type }) {
         let url = this._driver.opaqueURL("/company/type");
         return this._driver.sendPut({
-            data: input,
+            data: { id, type },
             endpoint: url.toString(),
         });
     }
