@@ -12,7 +12,15 @@ const cli = new CLI();
         return;
     }
     let resp = await cli.invoke(args);
-    if (resp.status != 201) {
+    if (args[1] === "help") {
         console.log(resp);
+        return;
+    }
+    if (resp.status != 201) {
+        try {
+            resp.headers.get("content-type");
+        } catch (e) {
+            console.log(JSON.stringify(resp, null, 2));
+        }
     }
 })();
