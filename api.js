@@ -226,6 +226,45 @@ module.exports = class API {
         });
     }
 
+    CreateCategoryHasTemplateInput = ["id_category_has_templates", "id_template", "id_category"];
+    CreateCategoryHasTemplate({ id_category_has_templates, id_template, id_category }) {
+        let url = this._driver.opaqueURL("/category-has-templates");
+        return this._driver.sendPost({
+            data: { id_category_has_templates, id_template, id_category },
+            endpoint: url.toString(),
+        });
+    }
+
+    DeleteCategoryHasTemplateInput = ["id_category_has_templates", "id_template", "id_category"];
+    DeleteCategoryHasTemplate({ id_category_has_templates, id_template, id_category }) {
+        let url = this._driver.opaqueURL("/category-has-templates");
+        return this._driver.sendDelete({
+            data: { id_category_has_templates, id_template, id_category },
+            endpoint: url.toString(),
+        });
+    }
+
+    ListCategoryHasTemplateInput = ["id_category_has_templates", "id_template", "id_category"];
+    ListCategoryHasTemplate({ id_category_has_templates, id_template, id_category }) {
+        let url = this._driver.opaqueURL(["", "category-has-templates"].join("/"));
+        if (id_category_has_templates) url.searchParams.set("id_category_has_templates", id_category_has_templates);
+        if (id_template) url.searchParams.set("id_template", id_template);
+        if (id_category) url.searchParams.set("id_category", id_category);
+
+        return this._driver.sendGet({
+            endpoint: url.toString(),
+        });
+    }
+
+    UpdateCategoryHasTemplateInput = ["id_category_has_templates", "id_template", "id_category"];
+    UpdateCategoryHasTemplate({ id_category_has_templates, id_template, id_category }) {
+        let url = this._driver.opaqueURL("/category-has-templates");
+        return this._driver.sendPut({
+            data: { id_category_has_templates, id_template, id_category },
+            endpoint: url.toString(),
+        });
+    }
+
     ChangeAccountTypeInput = ["id_user", "user_role", "id_identity"];
     ChangeAccountType({ id_user, user_role, id_identity }) {
         let url = this._driver.opaqueURL("/users/account-mode");
@@ -2949,11 +2988,11 @@ module.exports = class API {
         });
     }
 
-    UpdateTemplateInput = ["name", "sender_name", "senderName", "id_mail_transport", "lang", "id_category", "htmlCode", "deleted", "featured", "story", "training_only", "id"];
-    UpdateTemplate({ name, sender_name, senderName, id_mail_transport, lang, id_category, htmlCode, deleted, featured, story, training_only, id }) {
+    UpdateTemplateInput = ["name", "sender_name", "senderName", "id_mail_transport", "lang", "id_category", "mjmlCode", "htmlCode", "deleted", "featured", "story", "training_only", "public", "trusted", "id"];
+    UpdateTemplate({ name, sender_name, senderName, id_mail_transport, lang, id_category, mjmlCode, htmlCode, deleted, featured, story, training_only, public, trusted, id }) {
         let url = this._driver.opaqueURL(["", "templates", encodeURIComponent(id), "update"].join("/"));
         return this._driver.sendPost({
-            data: { name, sender_name, senderName, id_mail_transport, lang, id_category, htmlCode, deleted, featured, story, training_only, id },
+            data: { name, sender_name, senderName, id_mail_transport, lang, id_category, mjmlCode, htmlCode, deleted, featured, story, training_only, public, trusted, id },
             endpoint: url.toString(),
         });
     }
