@@ -712,11 +712,11 @@ module.exports = class API {
         });
     }
 
-    CreateTemplateCategoryInput = ["name"];
-    CreateTemplateCategory({ name }) {
+    CreateTemplateCategoryInput = ["name", "pl_name"];
+    CreateTemplateCategory({ name, pl_name }) {
         let url = this._driver.opaqueURL("/template-category");
         return this._driver.sendPost({
-            data: { name },
+            data: { name, pl_name },
             endpoint: url.toString(),
         });
     }
@@ -2988,11 +2988,11 @@ module.exports = class API {
         });
     }
 
-    UpdateTemplateInput = ["name", "sender_name", "senderName", "id_mail_transport", "lang", "id_category", "mjmlCode", "htmlCode", "deleted", "featured", "story", "training_only", "public", "trusted", "id"];
-    UpdateTemplate({ name, sender_name, senderName, id_mail_transport, lang, id_category, mjmlCode, htmlCode, deleted, featured, story, training_only, public, trusted, id }) {
+    UpdateTemplateInput = ["name", "sender_name", "senderName", "id_mail_transport", "lang", "id_category", "mjmlCode", "htmlCode", "deleted", "featured", "story", "training_only", "is_public", "trusted", "id"];
+    UpdateTemplate({ name, sender_name, senderName, id_mail_transport, lang, id_category, mjmlCode, htmlCode, deleted, featured, story, training_only, is_public, trusted, id }) {
         let url = this._driver.opaqueURL(["", "templates", encodeURIComponent(id), "update"].join("/"));
         return this._driver.sendPost({
-            data: { name, sender_name, senderName, id_mail_transport, lang, id_category, mjmlCode, htmlCode, deleted, featured, story, training_only, public, trusted, id },
+            data: { name, sender_name, senderName, id_mail_transport, lang, id_category, mjmlCode, htmlCode, deleted, featured, story, training_only, is_public, trusted, id },
             endpoint: url.toString(),
         });
     }
